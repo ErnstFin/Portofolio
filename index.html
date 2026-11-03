@@ -1,0 +1,1864 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ernst Edgard Finsensius | Backend & Database Systems Specialist</title>
+  
+  <!-- SEO & Meta -->
+  <meta name="description" content="Portofolio resmi Ernst Edgard Finsensius - Mahasiswa S1 Teknik Informatika SCU Semarang (IPK 3.75). Peminatan Sistem Basis Data & Backend Engineering dengan tema visual Rubah di Bawah Hujan.">
+  <meta name="author" content="Ernst Edgard Finsensius">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23F97316'><path d='M12 2L4 8l3 13 5-3 5 3 3-13-8-6zm0 4.5l4 3-1 6-3-1.8-3 1.8-1-6 4-3z'/></svg>">
+
+  <!-- Google Fonts: Plus Jakarta Sans & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- Tailwind CSS CDN with Custom Theme Config -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+          colors: {
+            rain: {
+              950: '#070B14', // Deepest Abyss
+              900: '#0B1220', // Midnight Rain Navy
+              850: '#0F172A', // Slate Deep
+              800: '#152138', // Card Surface
+              700: '#1E2E4E', // Surface Border
+              cyan: '#38BDF8', // Raindrop Highlight
+              glow: '#0EA5E9',
+            },
+            fox: {
+              orange: '#F97316', // Vibrant Fox Amber
+              light: '#FB923C',
+              dark: '#C2410C',
+              amber: '#F59E0B',
+              crimson: '#EF4444', // Red Accent for High Alert / Active
+              red: '#DC2626',
+            }
+          },
+          boxShadow: {
+            'glow-orange': '0 0 25px -5px rgba(249, 115, 22, 0.45)',
+            'glow-red': '0 0 25px -5px rgba(239, 68, 68, 0.45)',
+            'glow-blue': '0 0 30px -8px rgba(56, 189, 248, 0.35)',
+            'glass': '0 8px 32px 0 rgba(0, 0, 0, 0.37)',
+          },
+          keyframes: {
+            float: {
+              '0%, 100%': { transform: 'translateY(0px)' },
+              '50%': { transform: 'translateY(-8px)' },
+            },
+            pulseGlow: {
+              '0%, 100%': { opacity: '0.4' },
+              '50%': { opacity: '0.85' },
+            },
+            ripple: {
+              '0%': { transform: 'scale(0.8)', opacity: '1' },
+              '100%': { transform: 'scale(2.4)', opacity: '0' },
+            }
+          },
+          animation: {
+            float: 'float 4s ease-in-out infinite',
+            'float-delayed': 'float 5s ease-in-out 1.5s infinite',
+            pulseGlow: 'pulseGlow 3s ease-in-out infinite',
+            ripple: 'ripple 2s cubic-bezier(0, 0.2, 0.8, 1) infinite',
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #070B14;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #1E2E4E;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #F97316;
+    }
+
+    /* Glassmorphism Styles */
+    .glass-card {
+      background: rgba(15, 23, 42, 0.72);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(56, 189, 248, 0.12);
+    }
+    .glass-card:hover {
+      border-color: rgba(249, 115, 22, 0.35);
+    }
+    .glass-nav {
+      background: rgba(7, 11, 20, 0.82);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(56, 189, 248, 0.12);
+    }
+
+    /* Rain Canvas Behind Content */
+    #rain-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* Frosted Steam / Mist overlay */
+    .mist-gradient {
+      background: radial-gradient(circle at 50% 20%, rgba(56, 189, 248, 0.08) 0%, transparent 60%),
+                  radial-gradient(circle at 85% 70%, rgba(249, 115, 22, 0.06) 0%, transparent 50%),
+                  radial-gradient(circle at 15% 80%, rgba(239, 68, 68, 0.05) 0%, transparent 50%);
+    }
+
+    /* Glowing code tag */
+    .code-badge {
+      background: rgba(11, 18, 32, 0.85);
+      border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+  </style>
+</head>
+<body class="bg-rain-950 text-slate-200 font-sans antialiased selection:bg-fox-orange selection:text-white relative min-h-screen overflow-x-hidden">
+
+  <!-- Interactive Rain Canvas -->
+  <canvas id="rain-canvas"></canvas>
+
+  <!-- Atmospheric Background Ambient Lighting -->
+  <div class="fixed inset-0 mist-gradient pointer-events-none z-0"></div>
+
+  <!-- FLOATING AUDIO & RAIN CONTROLLER -->
+  <div class="fixed bottom-6 right-6 z-50 flex items-center gap-2 bg-rain-900/90 border border-rain-700/80 px-4 py-2.5 rounded-full shadow-2xl backdrop-blur-md">
+    <button id="toggle-rain-btn" class="flex items-center gap-2 text-xs font-mono text-slate-300 hover:text-rain-cyan transition-colors" title="Toggle Rain Visual">
+      <i class="fa-solid fa-cloud-showers-heavy text-rain-cyan" id="rain-icon"></i>
+      <span id="rain-status" class="hidden sm:inline">Hujan: ON</span>
+    </button>
+    <span class="text-rain-700">|</span>
+    <button id="toggle-audio-btn" class="flex items-center gap-2 text-xs font-mono text-slate-300 hover:text-fox-orange transition-colors" title="Toggle Ambient Rain Sound (Synthesized Web Audio)">
+      <i class="fa-solid fa-volume-xmark text-slate-400" id="audio-icon"></i>
+      <span id="audio-status" class="hidden sm:inline">Suara: OFF</span>
+    </button>
+  </div>
+
+  <!-- HEADER / NAVBAR -->
+  <header class="fixed top-0 left-0 right-0 z-40 glass-nav transition-all duration-300" id="main-nav">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      
+      <!-- Logo: Rubah di Bawah Hujan -->
+      <a href="#hero" class="flex items-center gap-3 group">
+        <div class="relative w-11 h-11 flex items-center justify-center rounded-xl bg-gradient-to-br from-fox-orange to-fox-crimson shadow-glow-orange group-hover:scale-105 transition-transform duration-300">
+          <!-- Sleek Origami/Geometric Fox Silhouette SVG -->
+          <svg class="w-7 h-7 text-white fill-current transform group-hover:rotate-6 transition-transform" viewBox="0 0 24 24">
+            <path d="M12 2.5L7.5 7.2L3.5 6L5.5 13.5L12 21.5L18.5 13.5L20.5 6L16.5 7.2L12 2.5ZM12 6.8L15 9.8L13.8 14.5L12 13L10.2 14.5L9 9.8L12 6.8ZM6.8 9.2L8.2 10.3L7.3 13.8L6.8 9.2ZM17.2 9.2L16.7 13.8L15.8 10.3L17.2 9.2Z"/>
+          </svg>
+          <!-- Rain Droplet Badge on Logo -->
+          <span class="absolute -top-1 -right-1 w-3.5 h-3.5 bg-rain-cyan rounded-full border-2 border-rain-950 animate-pulse"></span>
+        </div>
+        <div class="flex flex-col">
+          <span class="font-bold text-lg tracking-tight text-white group-hover:text-fox-orange transition-colors flex items-center gap-1.5">
+            Ernst Finsensius
+            <span class="text-xs px-2 py-0.5 rounded-full bg-fox-crimson/20 text-fox-crimson border border-fox-crimson/30 font-mono">SCU</span>
+          </span>
+          <span class="text-xs text-slate-400 font-mono flex items-center gap-1">
+            <span class="inline-block w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span>
+            Backend & RDBMS Specialist
+          </span>
+        </div>
+      </a>
+
+      <!-- Desktop Navigation -->
+      <nav class="hidden md:flex items-center gap-8 text-sm font-medium">
+        <a href="#about" class="text-slate-300 hover:text-fox-orange transition-colors flex items-center gap-1.5">
+          <i class="fa-solid fa-address-card text-xs text-rain-cyan"></i> Tentang
+        </a>
+        <a href="#skills" class="text-slate-300 hover:text-fox-orange transition-colors flex items-center gap-1.5">
+          <i class="fa-solid fa-database text-xs text-rain-cyan"></i> Keahlian
+        </a>
+        <a href="#projects" class="text-slate-300 hover:text-fox-orange transition-colors flex items-center gap-1.5">
+          <i class="fa-solid fa-diagram-project text-xs text-rain-cyan"></i> Proyek
+        </a>
+        <a href="#playground" class="text-slate-300 hover:text-fox-orange transition-colors flex items-center gap-1.5">
+          <i class="fa-solid fa-terminal text-xs text-fox-crimson"></i> Query Lab
+        </a>
+        <a href="#experience" class="text-slate-300 hover:text-fox-orange transition-colors flex items-center gap-1.5">
+          <i class="fa-solid fa-timeline text-xs text-rain-cyan"></i> Pengalaman
+        </a>
+        <a href="#contact" class="text-slate-300 hover:text-fox-orange transition-colors flex items-center gap-1.5">
+          <i class="fa-solid fa-paper-plane text-xs text-fox-orange"></i> Kontak
+        </a>
+      </nav>
+
+      <!-- Action Button & Mobile Toggle -->
+      <div class="flex items-center gap-3">
+        <a href="#contact" class="hidden sm:inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-fox-orange to-fox-red text-white text-xs font-semibold tracking-wide shadow-glow-orange hover:brightness-110 active:scale-95 transition-all">
+          <i class="fa-solid fa-envelope"></i> Rekrut Ernst
+        </a>
+        <button id="mobile-menu-btn" class="md:hidden p-2.5 rounded-xl bg-rain-850 border border-rain-700 text-slate-300 hover:text-fox-orange focus:outline-none" aria-label="Buka Menu">
+          <i class="fa-solid fa-bars text-lg" id="menu-icon"></i>
+        </button>
+      </div>
+
+    </div>
+
+    <!-- Mobile Navigation Drawer -->
+    <div id="mobile-menu" class="hidden md:hidden px-6 pt-4 pb-6 bg-rain-900/98 border-b border-rain-700 flex flex-col gap-4 text-sm font-medium">
+      <a href="#about" class="py-2 text-slate-300 hover:text-fox-orange flex items-center gap-2 border-b border-rain-800">
+        <i class="fa-solid fa-address-card text-rain-cyan"></i> Tentang Saya
+      </a>
+      <a href="#skills" class="py-2 text-slate-300 hover:text-fox-orange flex items-center gap-2 border-b border-rain-800">
+        <i class="fa-solid fa-database text-rain-cyan"></i> Keahlian Teknis
+      </a>
+      <a href="#projects" class="py-2 text-slate-300 hover:text-fox-orange flex items-center gap-2 border-b border-rain-800">
+        <i class="fa-solid fa-diagram-project text-rain-cyan"></i> Proyek Pilihan
+      </a>
+      <a href="#playground" class="py-2 text-slate-300 hover:text-fox-orange flex items-center gap-2 border-b border-rain-800">
+        <i class="fa-solid fa-terminal text-fox-crimson"></i> EXPLAIN ANALYZE Lab
+      </a>
+      <a href="#experience" class="py-2 text-slate-300 hover:text-fox-orange flex items-center gap-2 border-b border-rain-800">
+        <i class="fa-solid fa-timeline text-rain-cyan"></i> Riwayat & Organisasi
+      </a>
+      <a href="#contact" class="py-2 text-fox-orange font-semibold flex items-center gap-2">
+        <i class="fa-solid fa-paper-plane text-fox-crimson"></i> Hubungi Langsung
+      </a>
+    </div>
+  </header>
+
+  <!-- MAIN CONTENT CONTAINER -->
+  <main class="relative z-10 pt-24">
+
+    <!-- HERO SECTION -->
+    <section id="hero" class="min-h-[calc(100vh-6rem)] flex items-center justify-center px-4 sm:px-6 lg:px-8 py-16 relative">
+      <div class="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        
+        <!-- Text Column -->
+        <div class="lg:col-span-7 flex flex-col items-start text-left space-y-6">
+          
+          <!-- Metaphor Badge -->
+          <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-rain-800/90 border border-rain-700/80 text-xs font-mono">
+            <span class="w-2 h-2 rounded-full bg-fox-crimson animate-ping"></span>
+            <span class="text-rain-cyan">Tema:</span>
+            <span class="text-fox-light font-semibold">Rubah di Bawah Hujan (Rain & Fox)</span>
+          </div>
+
+          <!-- Main Headline -->
+          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-tight">
+            Menemukan Ketertiban Data di Tengah <br class="hidden sm:block" />
+            <span class="text-transparent bg-clip-text bg-gradient-to-r from-rain-cyan via-fox-orange to-fox-crimson">
+              Derasnya Arus Informasi.
+            </span>
+          </h1>
+
+          <!-- Subtitle / Bio summary -->
+          <p class="text-base sm:text-lg text-slate-300 max-w-2xl leading-relaxed">
+            Halo, saya <span class="text-white font-semibold underline decoration-fox-orange underline-offset-4">Ernst Edgard Finsensius</span>. 
+            Mahasiswa S1 Teknik Informatika di <span class="text-slate-100 font-medium">Universitas Katolik Soegijapranata (SCU Semarang)</span> dengan <span class="text-fox-orange font-bold font-mono">IPK 3.75/4.00</span>. 
+            Berfokus pada <span class="text-rain-cyan font-medium">Sistem Basis Data Berkinerja Tinggi</span>, optimasi kueri kompleks (<code class="text-xs bg-rain-900 px-1.5 py-0.5 rounded text-fox-amber font-mono">EXPLAIN ANALYZE</code>), dan arsitektur backend yang tangguh.
+          </p>
+
+          <!-- Core Value Proposition / Bullet tags -->
+          <div class="flex flex-wrap gap-2.5 pt-2">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-lg code-badge text-xs font-mono text-slate-300">
+              <i class="fa-solid fa-server text-rain-cyan"></i>
+              <span>RDBMS & ACID Compliance</span>
+            </div>
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-lg code-badge text-xs font-mono text-slate-300">
+              <i class="fa-solid fa-bolt text-fox-orange"></i>
+              <span>Latency Optimization &lt;15ms</span>
+            </div>
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-lg code-badge text-xs font-mono text-slate-300">
+              <i class="fa-solid fa-shield-halved text-fox-crimson"></i>
+              <span>High Fault-Tolerant APIs</span>
+            </div>
+          </div>
+
+          <!-- CTA Buttons & Social Links -->
+          <div class="flex flex-wrap items-center gap-4 pt-4">
+            <a href="#projects" class="px-6 py-3.5 rounded-xl bg-gradient-to-r from-fox-orange via-fox-light to-fox-crimson text-white font-semibold text-sm shadow-glow-orange hover:shadow-glow-red hover:scale-105 active:scale-95 transition-all flex items-center gap-2.5">
+              <i class="fa-solid fa-folder-open"></i>
+              <span>Jelajahi 5 Proyek Utama</span>
+            </a>
+            <a href="https://github.com/ErnstFin" target="_blank" rel="noopener noreferrer" class="px-5 py-3.5 rounded-xl bg-rain-850 hover:bg-rain-800 text-slate-200 hover:text-white border border-rain-700/80 font-medium text-sm transition-all flex items-center gap-2 shadow-sm hover:border-rain-cyan">
+              <i class="fa-brands fa-github text-lg text-rain-cyan"></i>
+              <span>GitHub</span>
+            </a>
+            <a href="https://linkedin.com/in/ernstedgardfinsensius" target="_blank" rel="noopener noreferrer" class="px-5 py-3.5 rounded-xl bg-rain-850 hover:bg-rain-800 text-slate-200 hover:text-white border border-rain-700/80 font-medium text-sm transition-all flex items-center gap-2 shadow-sm hover:border-fox-orange">
+              <i class="fa-brands fa-linkedin text-lg text-fox-orange"></i>
+              <span>LinkedIn</span>
+            </a>
+          </div>
+
+          <!-- Academic Metrics Ribbon -->
+          <div class="grid grid-cols-3 gap-4 pt-6 w-full max-w-lg border-t border-rain-700/60">
+            <div>
+              <div class="text-2xl font-bold font-mono text-fox-orange">3.75<span class="text-xs text-slate-400 font-sans"> / 4.00</span></div>
+              <div class="text-xs text-slate-400">IPK Kumulatif SCU</div>
+            </div>
+            <div>
+              <div class="text-2xl font-bold font-mono text-rain-cyan">5+</div>
+              <div class="text-xs text-slate-400">Proyek Produksi</div>
+            </div>
+            <div>
+              <div class="text-2xl font-bold font-mono text-fox-crimson">100%</div>
+              <div class="text-xs text-slate-400">Dedikasi RDBMS</div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Visual Thematic Column: Rubah di Bawah Hujan -->
+        <div class="lg:col-span-5 flex justify-center relative">
+          
+          <!-- Glowing Aura Behind Fox -->
+          <div class="absolute w-72 h-72 sm:w-96 sm:h-96 rounded-full bg-gradient-to-tr from-rain-glow/20 via-fox-orange/20 to-fox-crimson/20 filter blur-3xl animate-pulseGlow pointer-events-none"></div>
+
+          <!-- The Thematic Card -->
+          <div class="relative w-full max-w-md glass-card rounded-3xl p-6 sm:p-8 shadow-glass border-rain-700/60 overflow-hidden group">
+            
+            <!-- Atmospheric Rain Drops on Card top border -->
+            <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-rain-cyan via-fox-orange to-fox-crimson"></div>
+
+            <!-- Terminal Header on Top of the Thematic Canvas -->
+            <div class="flex items-center justify-between pb-4 mb-4 border-b border-rain-700/60 font-mono text-xs text-slate-400">
+              <div class="flex items-center gap-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-fox-crimson inline-block"></span>
+                <span class="w-2.5 h-2.5 rounded-full bg-fox-amber inline-block"></span>
+                <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 inline-block"></span>
+                <span class="ml-1 text-slate-300">rubah_dalam_hujan.sql</span>
+              </div>
+              <span class="text-rain-cyan flex items-center gap-1">
+                <i class="fa-solid fa-umbrella text-xs"></i> Protected
+              </span>
+            </div>
+
+            <!-- SVG Illustration: Rubah Merah/Oranye Tenang di Bawah Payung & Rintik Hujan -->
+            <div class="relative py-4 flex flex-col items-center justify-center">
+              
+              <svg class="w-48 h-48 sm:w-56 sm:h-56 filter drop-shadow-xl animate-float" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <!-- Umbrella Canopy protecting the Fox from rain -->
+                <path d="M25 85 C25 35, 175 35, 175 85 C155 80, 135 88, 100 80 C65 88, 45 80, 25 85 Z" fill="url(#umbrellaGradient)" />
+                <path d="M25 85 C50 78, 80 84, 100 80 C120 84, 150 78, 175 85" stroke="#38BDF8" stroke-width="2" stroke-linecap="round"/>
+                <!-- Umbrella Handle -->
+                <path d="M100 80 V155 C100 162, 92 165, 87 160" stroke="#94A3B8" stroke-width="3" stroke-linecap="round"/>
+
+                <!-- Raindrops bouncing off umbrella -->
+                <circle cx="50" cy="40" r="1.5" fill="#38BDF8" opacity="0.8"/>
+                <circle cx="85" cy="28" r="2" fill="#38BDF8" opacity="0.9"/>
+                <circle cx="130" cy="35" r="1.5" fill="#38BDF8" opacity="0.8"/>
+                <circle cx="160" cy="50" r="2" fill="#38BDF8" opacity="0.7"/>
+
+                <!-- The Fox Silhouette (Kitsune / Red Fox) sitting peacefully -->
+                <!-- Body -->
+                <path d="M90 120 C85 110, 115 110, 110 120 L125 155 C125 165, 75 165, 75 155 Z" fill="url(#foxBodyGradient)" />
+                
+                <!-- Fox Chest/Belly White Fur -->
+                <path d="M94 125 C92 135, 108 135, 106 125 L108 152 C104 154, 96 154, 92 152 Z" fill="#F8FAFC" opacity="0.9"/>
+
+                <!-- Fox Head -->
+                <polygon points="100,105 82,90 92,118" fill="#F97316"/>
+                <polygon points="100,105 118,90 108,118" fill="#EA580C"/>
+                <!-- Ear insides -->
+                <polygon points="86,94 84,92 90,106" fill="#FEE2E2"/>
+                <polygon points="114,94 116,92 110,106" fill="#FEE2E2"/>
+                <!-- Muzzle & Snout -->
+                <polygon points="96,112 104,112 100,118" fill="#1E293B"/>
+
+                <!-- Glowing Fox Eyes (Calm & Focused) -->
+                <circle cx="94" cy="108" r="1.5" fill="#38BDF8"/>
+                <circle cx="106" cy="108" r="1.5" fill="#38BDF8"/>
+
+                <!-- Bushy Fox Tail curling forward with white tip -->
+                <path d="M120 152 C135 150, 148 138, 142 125 C138 116, 128 122, 124 135 Z" fill="url(#foxTailGradient)"/>
+                <!-- White tip of tail -->
+                <path d="M142 125 C141 120, 133 120, 131 126 C136 127, 140 126, 142 125 Z" fill="#FFFFFF"/>
+
+                <!-- Ripple Puddle under the Fox -->
+                <ellipse cx="100" cy="165" rx="55" ry="7" fill="url(#puddleGradient)" opacity="0.6"/>
+                <ellipse cx="100" cy="165" rx="35" ry="4" stroke="#38BDF8" stroke-width="0.8" opacity="0.5"/>
+
+                <!-- Gradients -->
+                <defs>
+                  <linearGradient id="umbrellaGradient" x1="25" y1="35" x2="175" y2="85" gradientUnits="userSpaceOnUse">
+                    <stop offset="0%" stop-color="#0F172A"/>
+                    <stop offset="50%" stop-color="#1E293B"/>
+                    <stop offset="100%" stop-color="#0F172A"/>
+                  </linearGradient>
+                  <linearGradient id="foxBodyGradient" x1="75" y1="110" x2="125" y2="165" gradientUnits="userSpaceOnUse">
+                    <stop offset="0%" stop-color="#FB923C"/>
+                    <stop offset="60%" stop-color="#F97316"/>
+                    <stop offset="100%" stop-color="#C2410C"/>
+                  </linearGradient>
+                  <linearGradient id="foxTailGradient" x1="120" y1="120" x2="148" y2="152" gradientUnits="userSpaceOnUse">
+                    <stop offset="0%" stop-color="#F97316"/>
+                    <stop offset="100%" stop-color="#DC2626"/>
+                  </linearGradient>
+                  <radialGradient id="puddleGradient" cx="50%" cy="50%" r="50%">
+                    <stop offset="0%" stop-color="#38BDF8" stop-opacity="0.5"/>
+                    <stop offset="80%" stop-color="#0F172A" stop-opacity="0.8"/>
+                    <stop offset="100%" stop-color="transparent"/>
+                  </radialGradient>
+                </defs>
+              </svg>
+
+              <!-- Floating Live Query Pill inside Thematic Box -->
+              <div class="w-full bg-rain-950/90 border border-rain-700/80 rounded-xl p-3 mt-3 font-mono text-xs space-y-1.5 shadow-lg">
+                <div class="flex items-center justify-between text-slate-400">
+                  <span class="text-rain-cyan"><i class="fa-solid fa-terminal mr-1"></i> EXPLAIN ANALYZE</span>
+                  <span class="text-emerald-400 font-semibold flex items-center gap-1">
+                    <i class="fa-solid fa-circle-check text-[10px]"></i> 1.24 ms
+                  </span>
+                </div>
+                <div class="text-slate-300 truncate">
+                  <span class="text-fox-orange">SELECT</span> * <span class="text-fox-orange">FROM</span> transactions <span class="text-fox-orange">WHERE</span> status = <span class="text-fox-amber">'SUCCESS'</span>;
+                </div>
+                <div class="text-[11px] text-slate-400 flex items-center justify-between pt-1 border-t border-rain-800">
+                  <span>Planning Time: <strong class="text-slate-200">0.08 ms</strong></span>
+                  <span class="text-fox-light">Index Scan: <strong class="text-white">B-Tree Hit</strong></span>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Card Bottom Footer -->
+            <div class="pt-3 border-t border-rain-700/60 flex items-center justify-between text-xs text-slate-400 font-mono">
+              <span class="flex items-center gap-1.5">
+                <span class="w-2 h-2 rounded-full bg-fox-orange"></span>
+                <span>Rubah: Agilitas Logika</span>
+              </span>
+              <span class="flex items-center gap-1.5">
+                <span class="w-2 h-2 rounded-full bg-rain-cyan"></span>
+                <span>Hujan: Kedalaman Data</span>
+              </span>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION: TENTANG SAYA (ABOUT ME & FILOSOFI TEMA) -->
+    <section id="about" class="py-20 px-4 sm:px-6 lg:px-8 border-t border-rain-700/50 relative">
+      <div class="max-w-7xl mx-auto">
+        
+        <!-- Section Title Header -->
+        <div class="flex flex-col items-center text-center mb-14">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-rain-800 border border-rain-700 text-xs font-mono text-fox-orange mb-3">
+            <i class="fa-solid fa-compass"></i> Profil & Konseptual
+          </div>
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+            Ketelitian Arsitektur di Tengah Dinamika Sistem
+          </h2>
+          <div class="w-24 h-1 bg-gradient-to-r from-rain-cyan via-fox-orange to-fox-crimson rounded-full mt-4"></div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-stretch">
+          
+          <!-- Column 1: Story & Persona (7 cols) -->
+          <div class="lg:col-span-7 glass-card rounded-2xl p-6 sm:p-8 flex flex-col justify-between space-y-6">
+            <div class="space-y-4 text-slate-300 leading-relaxed text-sm sm:text-base">
+              
+              <div class="flex items-center gap-3 pb-3 border-b border-rain-700/60">
+                <div class="w-10 h-10 rounded-xl bg-rain-800 flex items-center justify-center text-fox-orange border border-rain-700">
+                  <i class="fa-solid fa-user-gear text-lg"></i>
+                </div>
+                <div>
+                  <h3 class="text-lg font-bold text-white">Ernst Edgard Finsensius</h3>
+                  <p class="text-xs text-slate-400 font-mono">Ungaran, Kabupaten Semarang, Jawa Tengah</p>
+                </div>
+              </div>
+
+              <p>
+                Saya adalah mahasiswa <strong class="text-white">Teknik Informatika di Universitas Katolik Soegijapranata (SCU)</strong> yang mendedikasikan fokus keahlian pada rekayasa backend dan optimalisasi sistem basis data relasional (<span class="text-rain-cyan font-mono">RDBMS</span>).
+              </p>
+
+              <!-- Filosofi Rubah di Bawah Hujan -->
+              <div class="p-4 rounded-xl bg-rain-950/80 border-l-4 border-fox-orange space-y-2">
+                <h4 class="text-white font-semibold text-sm flex items-center gap-2">
+                  <i class="fa-solid fa-feather text-fox-orange"></i>
+                  Filosofi Tema: "Rubah di Bawah Hujan"
+                </h4>
+                <p class="text-xs sm:text-sm text-slate-300 italic">
+                  "Hujan melambangkan derasnya data tak terstruktur dan beban kueri konkurensi tinggi yang terus membanjiri server. Rubah adalah representasi kecerdikan, kelincahan insting, dan ketenangan seorang backend engineer. Alih-alih tenggelam dalam banjir data, seekor rubah menemukan jalur paling efisien, mengantisipasi celah transaksi, dan mengeksekusi logika secara presisi."
+                </p>
+              </div>
+
+              <p>
+                Kecintaan saya pada database bukan sekadar menulis kueri <code class="text-xs bg-rain-900 px-1 py-0.5 rounded text-rain-cyan font-mono">CRUD</code> biasa, melainkan menelisik cara mesin database bekerja di balik layar: mekanisme locking transaksi, isolasi ACID, pohon indeks B-Tree, serta menganalisis cost execution plan melalui <strong class="text-fox-light">EXPLAIN ANALYZE</strong> agar latensi sistem tetap di bawah hitungan milidetik.
+              </p>
+            </div>
+
+            <!-- Contact Quick Pills -->
+            <div class="pt-4 border-t border-rain-700/60 grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs font-mono">
+              <a href="mailto:ernstfinsensius@gmail.com" class="p-2.5 rounded-lg bg-rain-850 hover:bg-rain-800 border border-rain-700 text-slate-300 hover:text-white flex items-center gap-2 transition-colors">
+                <i class="fa-solid fa-envelope text-fox-crimson"></i>
+                <span class="truncate">ernstfinsensius@gmail.com</span>
+              </a>
+              <a href="https://wa.me/6288802673812" target="_blank" rel="noopener noreferrer" class="p-2.5 rounded-lg bg-rain-850 hover:bg-rain-800 border border-rain-700 text-slate-300 hover:text-white flex items-center gap-2 transition-colors">
+                <i class="fa-brands fa-whatsapp text-emerald-400"></i>
+                <span>+62 888-0267-3812</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Column 2: Education & Academic Credentials (5 cols) -->
+          <div class="lg:col-span-5 flex flex-col gap-6">
+            
+            <!-- Education Card -->
+            <div class="glass-card rounded-2xl p-6 border-rain-700/60 space-y-4 flex-1">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-mono text-rain-cyan uppercase tracking-wider">Pendidikan Formal</span>
+                <span class="px-2 py-0.5 rounded bg-fox-orange/20 text-fox-orange text-xs font-mono font-bold">Aktif</span>
+              </div>
+
+              <div>
+                <h4 class="text-lg font-bold text-white">S1 Teknik Informatika</h4>
+                <p class="text-slate-300 text-sm font-medium">Universitas Katolik Soegijapranata (SCU Semarang)</p>
+                <p class="text-xs text-slate-400 mt-1 font-mono">Peminatan: Sistem Basis Data & Backend Engineering</p>
+              </div>
+
+              <!-- GPA Highlight Pill -->
+              <div class="p-3.5 rounded-xl bg-gradient-to-r from-rain-900 to-rain-850 border border-fox-orange/30 flex items-center justify-between">
+                <div>
+                  <div class="text-xs text-slate-400 uppercase font-mono">Indeks Prestasi Kumulatif</div>
+                  <div class="text-2xl font-bold font-mono text-fox-orange">3.75 <span class="text-xs text-slate-400 font-sans">/ 4.00</span></div>
+                </div>
+                <div class="w-12 h-12 rounded-xl bg-fox-orange/10 border border-fox-orange/30 flex items-center justify-center text-fox-orange text-xl">
+                  <i class="fa-solid fa-graduation-cap"></i>
+                </div>
+              </div>
+
+              <div class="space-y-2 pt-2">
+                <div class="text-xs font-semibold text-slate-300">Fokus Studi Unggulan:</div>
+                <div class="flex flex-wrap gap-1.5 text-xs">
+                  <span class="px-2 py-1 rounded bg-rain-850 text-slate-300 border border-rain-700">Perancangan Basis Data Relasional</span>
+                  <span class="px-2 py-1 rounded bg-rain-850 text-slate-300 border border-rain-700">Statistika & Probabilitas Terapan</span>
+                  <span class="px-2 py-1 rounded bg-rain-850 text-slate-300 border border-rain-700">Struktur Data & Algoritma</span>
+                  <span class="px-2 py-1 rounded bg-rain-850 text-slate-300 border border-rain-700">Rekayasa Perangkat Lunak Web</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Core Working Values -->
+            <div class="glass-card rounded-2xl p-6 border-rain-700/60 space-y-3">
+              <span class="text-xs font-mono text-fox-crimson uppercase tracking-wider">Prinsip Kerja</span>
+              <div class="grid grid-cols-2 gap-3 text-xs">
+                <div class="p-3 rounded-lg bg-rain-950/70 border border-rain-800">
+                  <div class="text-rain-cyan font-bold mb-1"><i class="fa-solid fa-lock mr-1"></i> ACID Compliance</div>
+                  <p class="text-slate-400 leading-tight">Integritas data tanpa kompromi dalam setiap transaksi.</p>
+                </div>
+                <div class="p-3 rounded-lg bg-rain-950/70 border border-rain-800">
+                  <div class="text-fox-orange font-bold mb-1"><i class="fa-solid fa-gauge-high mr-1"></i> Low Latency</div>
+                  <p class="text-slate-400 leading-tight">Optimasi indeks B-Tree & pencegahan bottleneck kueri.</p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION: KEAHLIAN TEKNIS (TECHNICAL SKILLS) -->
+    <section id="skills" class="py-20 px-4 sm:px-6 lg:px-8 bg-rain-900/40 relative border-t border-rain-700/50">
+      <div class="max-w-7xl mx-auto">
+        
+        <div class="flex flex-col items-center text-center mb-14">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-rain-800 border border-rain-700 text-xs font-mono text-rain-cyan mb-3">
+            <i class="fa-solid fa-microchip"></i> Stack & Kapabilitas
+          </div>
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+            Keahlian Rekayasa & Arsitektur
+          </h2>
+          <p class="text-slate-400 text-sm sm:text-base max-w-2xl mt-2">
+            Perpaduan keahlian mendalam pada pemodelan basis data, logika backend handal, serta analisis data empiris.
+          </p>
+          <div class="w-24 h-1 bg-gradient-to-r from-rain-cyan via-fox-orange to-fox-crimson rounded-full mt-4"></div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          
+          <!-- Card 1: RDBMS & Query Optimization (Highlight Biru & Oranye) -->
+          <div class="glass-card rounded-2xl p-6 border-rain-700/60 hover:border-rain-cyan transition-all duration-300 relative group">
+            <div class="w-12 h-12 rounded-xl bg-rain-cyan/10 border border-rain-cyan/30 flex items-center justify-center text-rain-cyan text-xl mb-5 group-hover:scale-110 transition-transform">
+              <i class="fa-solid fa-database"></i>
+            </div>
+            
+            <h3 class="text-xl font-bold text-white mb-2 group-hover:text-rain-cyan transition-colors">
+              RDBMS & Database Optimization
+            </h3>
+            <p class="text-slate-400 text-xs leading-relaxed mb-5">
+              Pemodelan skema relasional, normalisasi tingkat tinggi (3NF/BCNF), serta mitigasi kueri lambat berbasis analisis fisik kueri.
+            </p>
+
+            <div class="space-y-3 font-mono text-xs">
+              <div>
+                <div class="flex justify-between text-slate-300 mb-1">
+                  <span>PostgreSQL & MySQL</span>
+                  <span class="text-rain-cyan">Expertise 90%</span>
+                </div>
+                <div class="w-full bg-rain-950 rounded-full h-1.5 overflow-hidden">
+                  <div class="bg-gradient-to-r from-rain-cyan to-blue-600 h-1.5 rounded-full" style="width: 90%"></div>
+                </div>
+              </div>
+
+              <div>
+                <div class="flex justify-between text-slate-300 mb-1">
+                  <span>EXPLAIN ANALYZE & Indexing</span>
+                  <span class="text-fox-orange">Expertise 92%</span>
+                </div>
+                <div class="w-full bg-rain-950 rounded-full h-1.5 overflow-hidden">
+                  <div class="bg-gradient-to-r from-fox-orange to-fox-crimson h-1.5 rounded-full" style="width: 92%"></div>
+                </div>
+              </div>
+
+              <div>
+                <div class="flex justify-between text-slate-300 mb-1">
+                  <span>ACID & Transaction Locking</span>
+                  <span class="text-emerald-400">Expertise 88%</span>
+                </div>
+                <div class="w-full bg-rain-950 rounded-full h-1.5 overflow-hidden">
+                  <div class="bg-emerald-400 h-1.5 rounded-full" style="width: 88%"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Tags -->
+            <div class="flex flex-wrap gap-1.5 mt-6 pt-4 border-t border-rain-700/60">
+              <span class="px-2 py-1 rounded bg-rain-850 text-[11px] text-slate-300">Composite Indexes</span>
+              <span class="px-2 py-1 rounded bg-rain-850 text-[11px] text-slate-300">Foreign Keys</span>
+              <span class="px-2 py-1 rounded bg-rain-850 text-[11px] text-slate-300">Stored Procedures</span>
+              <span class="px-2 py-1 rounded bg-rain-850 text-[11px] text-slate-300">Table Partitioning</span>
+            </div>
+          </div>
+
+          <!-- Card 2: Backend Engineering (Highlight Oranye & Merah) -->
+          <div class="glass-card rounded-2xl p-6 border-rain-700/60 hover:border-fox-orange transition-all duration-300 relative group">
+            <div class="w-12 h-12 rounded-xl bg-fox-orange/10 border border-fox-orange/30 flex items-center justify-center text-fox-orange text-xl mb-5 group-hover:scale-110 transition-transform">
+              <i class="fa-solid fa-gears"></i>
+            </div>
+            
+            <h3 class="text-xl font-bold text-white mb-2 group-hover:text-fox-orange transition-colors">
+              Backend Systems & APIs
+            </h3>
+            <p class="text-slate-400 text-xs leading-relaxed mb-5">
+              Pembangunan layanan RESTful API tangguh, autentikasi aman, pemrosesan asinkron, dan integrasi bot cerdas.
+            </p>
+
+            <div class="space-y-3 font-mono text-xs">
+              <div>
+                <div class="flex justify-between text-slate-300 mb-1">
+                  <span>PHP / Laravel Framework</span>
+                  <span class="text-fox-orange">Expertise 88%</span>
+                </div>
+                <div class="w-full bg-rain-950 rounded-full h-1.5 overflow-hidden">
+                  <div class="bg-gradient-to-r from-fox-orange to-fox-amber h-1.5 rounded-full" style="width: 88%"></div>
+                </div>
+              </div>
+
+              <div>
+                <div class="flex justify-between text-slate-300 mb-1">
+                  <span>Python & Telegram Bot API</span>
+                  <span class="text-rain-cyan">Expertise 85%</span>
+                </div>
+                <div class="w-full bg-rain-950 rounded-full h-1.5 overflow-hidden">
+                  <div class="bg-gradient-to-r from-rain-cyan to-blue-500 h-1.5 rounded-full" style="width: 85%"></div>
+                </div>
+              </div>
+
+              <div>
+                <div class="flex justify-between text-slate-300 mb-1">
+                  <span>Node.js / Express</span>
+                  <span class="text-slate-300">Expertise 80%</span>
+                </div>
+                <div class="w-full bg-rain-950 rounded-full h-1.5 overflow-hidden">
+                  <div class="bg-slate-400 h-1.5 rounded-full" style="width: 80%"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Tags -->
+            <div class="flex flex-wrap gap-1.5 mt-6 pt-4 border-t border-rain-700/60">
+              <span class="px-2 py-1 rounded bg-rain-850 text-[11px] text-slate-300">RESTful Architecture</span>
+              <span class="px-2 py-1 rounded bg-rain-850 text-[11px] text-slate-300">JWT & Sanctum</span>
+              <span class="px-2 py-1 rounded bg-rain-850 text-[11px] text-slate-300">Middleware Chains</span>
+              <span class="px-2 py-1 rounded bg-rain-850 text-[11px] text-slate-300">Async Webhooks</span>
+            </div>
+          </div>
+
+          <!-- Card 3: Applied Statistics & Data Processing (Highlight Merah & Biru) -->
+          <div class="glass-card rounded-2xl p-6 border-rain-700/60 hover:border-fox-crimson transition-all duration-300 relative group">
+            <div class="w-12 h-12 rounded-xl bg-fox-crimson/10 border border-fox-crimson/30 flex items-center justify-center text-fox-crimson text-xl mb-5 group-hover:scale-110 transition-transform">
+              <i class="fa-solid fa-chart-line"></i>
+            </div>
+            
+            <h3 class="text-xl font-bold text-white mb-2 group-hover:text-fox-crimson transition-colors">
+              Data Analytics & IoT Cleaning
+            </h3>
+            <p class="text-slate-400 text-xs leading-relaxed mb-5">
+              Pembersihan derau data telemetri, imputasi data sensor hilang, serta pemodelan uji statistika inferensial dan deskriptif.
+            </p>
+
+            <div class="space-y-3 font-mono text-xs">
+              <div>
+                <div class="flex justify-between text-slate-300 mb-1">
+                  <span>Python (Pandas & NumPy)</span>
+                  <span class="text-fox-crimson">Expertise 86%</span>
+                </div>
+                <div class="w-full bg-rain-950 rounded-full h-1.5 overflow-hidden">
+                  <div class="bg-gradient-to-r from-fox-crimson to-rose-600 h-1.5 rounded-full" style="width: 86%"></div>
+                </div>
+              </div>
+
+              <div>
+                <div class="flex justify-between text-slate-300 mb-1">
+                  <span>Applied Statistics & Hypothesis Testing</span>
+                  <span class="text-fox-orange">Expertise 90%</span>
+                </div>
+                <div class="w-full bg-rain-950 rounded-full h-1.5 overflow-hidden">
+                  <div class="bg-gradient-to-r from-fox-orange to-fox-amber h-1.5 rounded-full" style="width: 90%"></div>
+                </div>
+              </div>
+
+              <div>
+                <div class="flex justify-between text-slate-300 mb-1">
+                  <span>ThingSpeak IoT Telemetry</span>
+                  <span class="text-rain-cyan">Expertise 82%</span>
+                </div>
+                <div class="w-full bg-rain-950 rounded-full h-1.5 overflow-hidden">
+                  <div class="bg-rain-cyan h-1.5 rounded-full" style="width: 82%"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Tags -->
+            <div class="flex flex-wrap gap-1.5 mt-6 pt-4 border-t border-rain-700/60">
+              <span class="px-2 py-1 rounded bg-rain-850 text-[11px] text-slate-300">Outlier Removal</span>
+              <span class="px-2 py-1 rounded bg-rain-850 text-[11px] text-slate-300">Time-Series Imputation</span>
+              <span class="px-2 py-1 rounded bg-rain-850 text-[11px] text-slate-300">Z-Score & IQR</span>
+              <span class="px-2 py-1 rounded bg-rain-850 text-[11px] text-slate-300">SPSS / R Basics</span>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION: 5 PROYEK UNGGULAN (FEATURED PROJECTS) -->
+    <section id="projects" class="py-20 px-4 sm:px-6 lg:px-8 relative border-t border-rain-700/50">
+      <div class="max-w-7xl mx-auto">
+        
+        <div class="flex flex-col items-center text-center mb-12">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-rain-800 border border-rain-700 text-xs font-mono text-fox-orange mb-3">
+            <i class="fa-solid fa-code-fork"></i> Portofolio Teknis
+          </div>
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+            5 Proyek Rekayasa Unggulan
+          </h2>
+          <p class="text-slate-400 text-sm sm:text-base max-w-2xl mt-2">
+            Setiap proyek dirancang untuk memecahkan tantangan riil: konsistensi ACID, otomatisasi webhook, validasi perbankan, dan sanitasi data IoT.
+          </p>
+          <div class="w-24 h-1 bg-gradient-to-r from-rain-cyan via-fox-orange to-fox-crimson rounded-full mt-4"></div>
+        </div>
+
+        <!-- Filter Tab Buttons -->
+        <div class="flex flex-wrap items-center justify-center gap-2 mb-12">
+          <button class="project-filter-btn px-4 py-2 rounded-xl text-xs font-mono font-medium transition-all bg-gradient-to-r from-fox-orange to-fox-crimson text-white shadow-glow-orange" data-filter="all">
+            <i class="fa-solid fa-layer-group mr-1.5"></i> Semua Proyek (5)
+          </button>
+          <button class="project-filter-btn px-4 py-2 rounded-xl text-xs font-mono font-medium transition-all bg-rain-850 hover:bg-rain-800 text-slate-300 border border-rain-700 hover:border-rain-cyan" data-filter="backend">
+            <i class="fa-solid fa-server mr-1.5"></i> Backend & APIs
+          </button>
+          <button class="project-filter-btn px-4 py-2 rounded-xl text-xs font-mono font-medium transition-all bg-rain-850 hover:bg-rain-800 text-slate-300 border border-rain-700 hover:border-fox-orange" data-filter="database">
+            <i class="fa-solid fa-database mr-1.5"></i> RDBMS & Financial
+          </button>
+          <button class="project-filter-btn px-4 py-2 rounded-xl text-xs font-mono font-medium transition-all bg-rain-850 hover:bg-rain-800 text-slate-300 border border-rain-700 hover:border-fox-crimson" data-filter="data-science">
+            <i class="fa-solid fa-chart-pie mr-1.5"></i> Data & IoT
+          </button>
+        </div>
+
+        <!-- Project Grid (5 Projects) -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="projects-container">
+          
+          <!-- PROJECT 1: FinTrack (Laravel/PostgreSQL) -->
+          <article class="project-card glass-card rounded-2xl overflow-hidden border-rain-700/60 hover:border-fox-orange transition-all duration-300 flex flex-col justify-between group" data-category="backend database">
+            <div class="p-6">
+              <!-- Header Badges -->
+              <div class="flex items-center justify-between gap-2 mb-4 font-mono text-xs">
+                <span class="px-2.5 py-1 rounded bg-fox-orange/15 text-fox-orange border border-fox-orange/30 font-semibold">
+                  Financial Analytics
+                </span>
+                <span class="text-rain-cyan flex items-center gap-1">
+                  <i class="fa-solid fa-bolt text-xs"></i> &lt; 15ms Latency
+                </span>
+              </div>
+
+              <h3 class="text-2xl font-bold text-white mb-2 group-hover:text-fox-orange transition-colors flex items-center justify-between">
+                FinTrack
+                <i class="fa-solid fa-arrow-up-right-from-square text-sm opacity-0 group-hover:opacity-100 transition-opacity text-fox-orange"></i>
+              </h3>
+
+              <p class="text-slate-300 text-xs sm:text-sm leading-relaxed mb-4">
+                Sistem manajemen dan pelacakan arus kas keuangan berskala enterprise berbasis <strong class="text-white">Laravel</strong> dan <strong class="text-white">PostgreSQL</strong>. Memanfaatkan indeks komposit pada kolom timestamp dan relasi akun untuk menjamin integritas transaksi ACID pada mutasi finansial berfrekuensi tinggi.
+              </p>
+
+              <!-- Highlights list -->
+              <div class="space-y-1.5 text-xs text-slate-400 mb-6 font-mono">
+                <div class="flex items-center gap-2">
+                  <i class="fa-solid fa-check text-fox-orange"></i>
+                  <span>PostgreSQL B-Tree composite indexing</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <i class="fa-solid fa-check text-fox-orange"></i>
+                  <span>Strict DB constraint & race condition locking</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <i class="fa-solid fa-check text-fox-orange"></i>
+                  <span>Real-time aggregation of multi-ledger balances</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Footer & Tech Stack & Links -->
+            <div class="p-6 pt-0">
+              <div class="flex flex-wrap gap-1.5 mb-5">
+                <span class="px-2 py-0.5 rounded bg-rain-950 text-[11px] font-mono text-rain-cyan border border-rain-800">Laravel 10</span>
+                <span class="px-2 py-0.5 rounded bg-rain-950 text-[11px] font-mono text-rain-cyan border border-rain-800">PostgreSQL</span>
+                <span class="px-2 py-0.5 rounded bg-rain-950 text-[11px] font-mono text-slate-300 border border-rain-800">Tailwind CSS</span>
+                <span class="px-2 py-0.5 rounded bg-rain-950 text-[11px] font-mono text-slate-300 border border-rain-800">Chart.js</span>
+              </div>
+
+              <div class="pt-4 border-t border-rain-700/60 flex items-center justify-between">
+                <a href="https://github.com/ErnstFin/FinTrack" target="_blank" rel="noopener noreferrer" class="text-xs font-mono text-fox-orange hover:text-fox-light flex items-center gap-1.5 font-bold">
+                  <i class="fa-brands fa-github text-sm"></i> ErnstFin/FinTrack
+                </a>
+                <span class="text-[11px] text-slate-400 font-mono">Backend / DB</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- PROJECT 2: TeleHealth (Python / Telegram Bot / PostgreSQL) -->
+          <article class="project-card glass-card rounded-2xl overflow-hidden border-rain-700/60 hover:border-rain-cyan transition-all duration-300 flex flex-col justify-between group" data-category="backend database">
+            <div class="p-6">
+              <div class="flex items-center justify-between gap-2 mb-4 font-mono text-xs">
+                <span class="px-2.5 py-1 rounded bg-rain-cyan/15 text-rain-cyan border border-rain-cyan/30 font-semibold">
+                  Healthcare & Bot
+                </span>
+                <span class="text-emerald-400 flex items-center gap-1">
+                  <i class="fa-solid fa-circle-dot text-xs"></i> 99.9% Webhook
+                </span>
+              </div>
+
+              <h3 class="text-2xl font-bold text-white mb-2 group-hover:text-rain-cyan transition-colors flex items-center justify-between">
+                TeleHealth Bot
+                <i class="fa-solid fa-arrow-up-right-from-square text-sm opacity-0 group-hover:opacity-100 transition-opacity text-rain-cyan"></i>
+              </h3>
+
+              <p class="text-slate-300 text-xs sm:text-sm leading-relaxed mb-4">
+                Asisten kesehatan cerdas berbasis <strong class="text-white">Python Telegram Bot API</strong> dan <strong class="text-white">PostgreSQL</strong> untuk penjadwalan konsultasi, reminder dosis obat otomatis, dan manajemen riwayat kesehatan pasien secara aman dan asinkron.
+              </p>
+
+              <div class="space-y-1.5 text-xs text-slate-400 mb-6 font-mono">
+                <div class="flex items-center gap-2">
+                  <i class="fa-solid fa-check text-rain-cyan"></i>
+                  <span>Webhook architecture with AsyncIO concurrency</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <i class="fa-solid fa-check text-rain-cyan"></i>
+                  <span>State machine flow for patient consultation booking</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <i class="fa-solid fa-check text-rain-cyan"></i>
+                  <span>Automated scheduled dosage alerts</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="p-6 pt-0">
+              <div class="flex flex-wrap gap-1.5 mb-5">
+                <span class="px-2 py-0.5 rounded bg-rain-950 text-[11px] font-mono text-fox-orange border border-rain-800">Python 3.11</span>
+                <span class="px-2 py-0.5 rounded bg-rain-950 text-[11px] font-mono text-rain-cyan border border-rain-800">Telegram Bot API</span>
+                <span class="px-2 py-0.5 rounded bg-rain-950 text-[11px] font-mono text-rain-cyan border border-rain-800">PostgreSQL</span>
+                <span class="px-2 py-0.5 rounded bg-rain-950 text-[11px] font-mono text-slate-300 border border-rain-800">AsyncIO</span>
+              </div>
+
+              <div class="pt-4 border-t border-rain-700/60 flex items-center justify-between">
+                <a href="https://github.com/ErnstFin/TeleHealth" target="_blank" rel="noopener noreferrer" class="text-xs font-mono text-rain-cyan hover:text-white flex items-center gap-1.5 font-bold">
+                  <i class="fa-brands fa-github text-sm"></i> ErnstFin/TeleHealth
+                </a>
+                <span class="text-[11px] text-slate-400 font-mono">Bot / Python</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- PROJECT 3: SembaPay (Python / FinTech Data Validation) -->
+          <article class="project-card glass-card rounded-2xl overflow-hidden border-rain-700/60 hover:border-fox-crimson transition-all duration-300 flex flex-col justify-between group" data-category="backend database">
+            <div class="p-6">
+              <div class="flex items-center justify-between gap-2 mb-4 font-mono text-xs">
+                <span class="px-2.5 py-1 rounded bg-fox-crimson/15 text-fox-crimson border border-fox-crimson/30 font-semibold">
+                  FinTech & Security
+                </span>
+                <span class="text-fox-orange flex items-center gap-1">
+                  <i class="fa-solid fa-shield text-xs"></i> Zero Double-Spend
+                </span>
+              </div>
+
+              <h3 class="text-2xl font-bold text-white mb-2 group-hover:text-fox-crimson transition-colors flex items-center justify-between">
+                SembaPay
+                <i class="fa-solid fa-arrow-up-right-from-square text-sm opacity-0 group-hover:opacity-100 transition-opacity text-fox-crimson"></i>
+              </h3>
+
+              <p class="text-slate-300 text-xs sm:text-sm leading-relaxed mb-4">
+                Mesin validasi transaksi dan ledger mikro-finansial komoditas pangan (<strong class="text-white">Python</strong>). Mengimplementasikan verifikasi checksum tanda tangan digital, auditing jejak transaksi, dan penanganan konkurensi saldo secara atomik.
+              </p>
+
+              <div class="space-y-1.5 text-xs text-slate-400 mb-6 font-mono">
+                <div class="flex items-center gap-2">
+                  <i class="fa-solid fa-check text-fox-crimson"></i>
+                  <span>Double-entry bookkeeping verification engine</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <i class="fa-solid fa-check text-fox-crimson"></i>
+                  <span>Idempotency key enforcement on all checkout APIs</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <i class="fa-solid fa-check text-fox-crimson"></i>
+                  <span>Cryptographic checksum anomaly detection</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="p-6 pt-0">
+              <div class="flex flex-wrap gap-1.5 mb-5">
+                <span class="px-2 py-0.5 rounded bg-rain-950 text-[11px] font-mono text-fox-orange border border-rain-800">Python</span>
+                <span class="px-2 py-0.5 rounded bg-rain-950 text-[11px] font-mono text-fox-crimson border border-rain-800">Data Validation</span>
+                <span class="px-2 py-0.5 rounded bg-rain-950 text-[11px] font-mono text-rain-cyan border border-rain-800">PostgreSQL</span>
+                <span class="px-2 py-0.5 rounded bg-rain-950 text-[11px] font-mono text-slate-300 border border-rain-800">FinTech Ledger</span>
+              </div>
+
+              <div class="pt-4 border-t border-rain-700/60 flex items-center justify-between">
+                <a href="https://github.com/ErnstFin/SembaPay" target="_blank" rel="noopener noreferrer" class="text-xs font-mono text-fox-crimson hover:text-white flex items-center gap-1.5 font-bold">
+                  <i class="fa-brands fa-github text-sm"></i> ErnstFin/SembaPay
+                </a>
+                <span class="text-[11px] text-slate-400 font-mono">FinTech / Core</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- PROJECT 4: Show Case U (Laravel / MySQL) -->
+          <article class="project-card glass-card rounded-2xl overflow-hidden border-rain-700/60 hover:border-fox-light transition-all duration-300 flex flex-col justify-between group" data-category="backend">
+            <div class="p-6">
+              <div class="flex items-center justify-between gap-2 mb-4 font-mono text-xs">
+                <span class="px-2.5 py-1 rounded bg-fox-amber/15 text-fox-amber border border-fox-amber/30 font-semibold">
+                  Academic Exhibition
+                </span>
+                <span class="text-slate-300 flex items-center gap-1">
+                  <i class="fa-solid fa-users text-xs text-rain-cyan"></i> Multi-Role RBAC
+                </span>
+              </div>
+
+              <h3 class="text-2xl font-bold text-white mb-2 group-hover:text-fox-amber transition-colors flex items-center justify-between">
+                Show Case U
+                <i class="fa-solid fa-arrow-up-right-from-square text-sm opacity-0 group-hover:opacity-100 transition-opacity text-fox-amber"></i>
+              </h3>
+
+              <p class="text-slate-300 text-xs sm:text-sm leading-relaxed mb-4">
+                Portal pameran karya ilmiah dan repositori portofolio mahasiswa universitas dengan arsitektur <strong class="text-white">Laravel</strong> dan relasi <strong class="text-white">MySQL</strong> terstruktur. Dilengkapi sistem autentikasi bertingkat (Mahasiswa, Kurator, Dosen Penilai, Admin).
+              </p>
+
+              <div class="space-y-1.5 text-xs text-slate-400 mb-6 font-mono">
+                <div class="flex items-center gap-2">
+                  <i class="fa-solid fa-check text-fox-amber"></i>
+                  <span>Role-Based Access Control (RBAC) granular</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <i class="fa-solid fa-check text-fox-amber"></i>
+                  <span>Normalized MySQL schema with media attachment handling</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <i class="fa-solid fa-check text-fox-amber"></i>
+                  <span>Dynamic search and peer review evaluation metrics</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="p-6 pt-0">
+              <div class="flex flex-wrap gap-1.5 mb-5">
+                <span class="px-2 py-0.5 rounded bg-rain-950 text-[11px] font-mono text-fox-orange border border-rain-800">Laravel</span>
+                <span class="px-2 py-0.5 rounded bg-rain-950 text-[11px] font-mono text-rain-cyan border border-rain-800">MySQL</span>
+                <span class="px-2 py-0.5 rounded bg-rain-950 text-[11px] font-mono text-slate-300 border border-rain-800">Bootstrap / Blade</span>
+                <span class="px-2 py-0.5 rounded bg-rain-950 text-[11px] font-mono text-slate-300 border border-rain-800">SCU Campus</span>
+              </div>
+
+              <div class="pt-4 border-t border-rain-700/60 flex items-center justify-between">
+                <a href="https://github.com/ErnstFin/ShowCaseU" target="_blank" rel="noopener noreferrer" class="text-xs font-mono text-fox-amber hover:text-white flex items-center gap-1.5 font-bold">
+                  <i class="fa-brands fa-github text-sm"></i> ErnstFin/ShowCaseU
+                </a>
+                <span class="text-[11px] text-slate-400 font-mono">Portal / RBAC</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- PROJECT 5: Pembersihan Data Sensor IoT ThingSpeak (Python / Pandas) -->
+          <article class="project-card glass-card rounded-2xl overflow-hidden border-rain-700/60 hover:border-rain-cyan transition-all duration-300 flex flex-col justify-between group" data-category="data-science">
+            <div class="p-6">
+              <div class="flex items-center justify-between gap-2 mb-4 font-mono text-xs">
+                <span class="px-2.5 py-1 rounded bg-rain-cyan/15 text-rain-cyan border border-rain-cyan/30 font-semibold">
+                  IoT & Data Sanitization
+                </span>
+                <span class="text-fox-light flex items-center gap-1">
+                  <i class="fa-solid fa-filter text-xs"></i> 100% Sanitized
+                </span>
+              </div>
+
+              <h3 class="text-2xl font-bold text-white mb-2 group-hover:text-rain-cyan transition-colors flex items-center justify-between">
+                Pembersihan Data IoT
+                <i class="fa-solid fa-arrow-up-right-from-square text-sm opacity-0 group-hover:opacity-100 transition-opacity text-rain-cyan"></i>
+              </h3>
+
+              <p class="text-slate-300 text-xs sm:text-sm leading-relaxed mb-4">
+                Pipeline pra-pemrosesan data sensor lingkungan dari platform <strong class="text-white">ThingSpeak</strong> menggunakan <strong class="text-white">Python (Pandas, NumPy)</strong>. Menangani noise fluktuasi sinyal, interpolasi nilai yang hilang (missing data), dan deteksi anomali statistik berbasis Z-Score.
+              </p>
+
+              <div class="space-y-1.5 text-xs text-slate-400 mb-6 font-mono">
+                <div class="flex items-center gap-2">
+                  <i class="fa-solid fa-check text-rain-cyan"></i>
+                  <span>Statistical outlier filtering (IQR & 3-Sigma Rule)</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <i class="fa-solid fa-check text-rain-cyan"></i>
+                  <span>Time-series linear & polynomial imputation</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <i class="fa-solid fa-check text-rain-cyan"></i>
+                  <span>Automated ingestion from ThingSpeak REST API</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="p-6 pt-0">
+              <div class="flex flex-wrap gap-1.5 mb-5">
+                <span class="px-2 py-0.5 rounded bg-rain-950 text-[11px] font-mono text-fox-orange border border-rain-800">Python 3</span>
+                <span class="px-2 py-0.5 rounded bg-rain-950 text-[11px] font-mono text-rain-cyan border border-rain-800">Pandas & NumPy</span>
+                <span class="px-2 py-0.5 rounded bg-rain-950 text-[11px] font-mono text-slate-300 border border-rain-800">ThingSpeak REST</span>
+                <span class="px-2 py-0.5 rounded bg-rain-950 text-[11px] font-mono text-slate-300 border border-rain-800">Matplotlib</span>
+              </div>
+
+              <div class="pt-4 border-t border-rain-700/60 flex items-center justify-between">
+                <a href="https://github.com/ErnstFin/IoT-ThingSpeak-Data-Cleaning" target="_blank" rel="noopener noreferrer" class="text-xs font-mono text-rain-cyan hover:text-white flex items-center gap-1.5 font-bold">
+                  <i class="fa-brands fa-github text-sm"></i> ErnstFin/IoT-Cleaning
+                </a>
+                <span class="text-[11px] text-slate-400 font-mono">Telemetry / ETL</span>
+              </div>
+            </div>
+          </article>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION: INTERACTIVE SQL EXPLAIN ANALYZE LAB (FITUR KHUSUS SENIOR BACKEND) -->
+    <section id="playground" class="py-20 px-4 sm:px-6 lg:px-8 bg-rain-900/60 relative border-t border-rain-700/50">
+      <div class="max-w-5xl mx-auto">
+        
+        <div class="flex flex-col items-center text-center mb-12">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-rain-800 border border-rain-700 text-xs font-mono text-fox-crimson mb-3">
+            <i class="fa-solid fa-vial-circle-check"></i> Lab Interaktif Backend
+          </div>
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+            Simulasi Optimasi Query PostgreSQL
+          </h2>
+          <p class="text-slate-400 text-sm max-w-xl mt-2">
+            Uji perbedaan dramatis antara kueri tanpa indeks (Sequential Scan) vs kueri teroptimasi dengan B-Tree Composite Index racikan Ernst.
+          </p>
+          <div class="w-24 h-1 bg-gradient-to-r from-rain-cyan via-fox-orange to-fox-crimson rounded-full mt-4"></div>
+        </div>
+
+        <div class="glass-card rounded-2xl p-6 sm:p-8 border-rain-700/70 shadow-2xl">
+          
+          <!-- Mode Switcher -->
+          <div class="flex flex-wrap items-center justify-between gap-4 pb-6 border-b border-rain-700/60">
+            <div class="flex items-center gap-2">
+              <span class="text-xs font-mono text-slate-400 uppercase tracking-wider">Pilih Kondisi Kueri:</span>
+            </div>
+            <div class="inline-flex p-1 rounded-xl bg-rain-950 border border-rain-800">
+              <button id="btn-unoptimized" class="px-3.5 py-1.5 rounded-lg text-xs font-mono font-medium transition-all text-slate-400 hover:text-white">
+                <i class="fa-solid fa-triangle-exclamation text-fox-crimson mr-1"></i> Tanpa Indeks (Slow)
+              </button>
+              <button id="btn-optimized" class="px-3.5 py-1.5 rounded-lg text-xs font-mono font-medium transition-all bg-gradient-to-r from-fox-orange to-fox-crimson text-white shadow-glow-orange">
+                <i class="fa-solid fa-bolt text-yellow-300 mr-1"></i> Teroptimasi (Fast)
+              </button>
+            </div>
+          </div>
+
+          <!-- Code Box -->
+          <div class="mt-6 bg-rain-950 rounded-xl p-4 sm:p-5 border border-rain-800 font-mono text-xs sm:text-sm text-slate-300 relative overflow-x-auto">
+            <div class="flex items-center justify-between pb-3 mb-3 border-b border-rain-850 text-xs text-slate-400">
+              <span id="query-filename" class="text-fox-light">queries/get_monthly_settlement.sql</span>
+              <span class="text-rain-cyan"><i class="fa-solid fa-server mr-1"></i> PostgreSQL 16</span>
+            </div>
+            <pre id="query-sql-display" class="text-rain-cyan leading-relaxed"></pre>
+          </div>
+
+          <!-- Execution Stats Comparison -->
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-6">
+            <div class="p-4 rounded-xl bg-rain-950/80 border border-rain-800">
+              <div class="text-xs text-slate-400 font-mono">Scan Strategy</div>
+              <div id="stat-scan-method" class="text-base sm:text-lg font-bold font-mono text-emerald-400 mt-1">Index Scan via B-Tree</div>
+            </div>
+            <div class="p-4 rounded-xl bg-rain-950/80 border border-rain-800">
+              <div class="text-xs text-slate-400 font-mono">Execution Time</div>
+              <div id="stat-exec-time" class="text-base sm:text-lg font-bold font-mono text-fox-orange mt-1">1.18 ms</div>
+            </div>
+            <div class="p-4 rounded-xl bg-rain-950/80 border border-rain-800">
+              <div class="text-xs text-slate-400 font-mono">Rows Scanned / Buffer Cost</div>
+              <div id="stat-cost" class="text-base sm:text-lg font-bold font-mono text-rain-cyan mt-1">12 rows (Hit: 100%)</div>
+            </div>
+          </div>
+
+          <!-- Output explain plan -->
+          <div class="mt-4 p-4 rounded-xl bg-rain-900/90 border border-rain-800 font-mono text-xs text-slate-400 leading-relaxed">
+            <div class="text-slate-300 font-semibold mb-1 flex items-center gap-1.5">
+              <i class="fa-solid fa-network-wired text-fox-orange"></i> Analisis Rencana Eksekusi (Query Plan):
+            </div>
+            <p id="stat-explanation" class="text-slate-400">
+              PostgreSQL secara langsung meloncat ke pointer leaf node B-Tree <code class="text-rain-cyan">idx_fintrack_created_status</code> tanpa melakukan disk I/O berulang pada 1.250.000 row data transaksi.
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION: PENGALAMAN & ORGANISASI (EXPERIENCE TIMELINE) -->
+    <section id="experience" class="py-20 px-4 sm:px-6 lg:px-8 relative border-t border-rain-700/50">
+      <div class="max-w-5xl mx-auto">
+        
+        <div class="flex flex-col items-center text-center mb-16">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-rain-800 border border-rain-700 text-xs font-mono text-rain-cyan mb-3">
+            <i class="fa-solid fa-timeline"></i> Riwayat Nyata
+          </div>
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+            Pengalaman Akademik & Kepemimpinan
+          </h2>
+          <p class="text-slate-400 text-sm max-w-xl mt-2">
+            Kombinasi antara dedikasi pengajaran teknis di kampus, koordinasi organisasi kemahasiswaan, dan pelayanan sosial.
+          </p>
+          <div class="w-24 h-1 bg-gradient-to-r from-rain-cyan via-fox-orange to-fox-crimson rounded-full mt-4"></div>
+        </div>
+
+        <!-- Vertical Timeline with Water Droplet Nodes -->
+        <div class="relative border-l-2 border-rain-700/80 ml-4 sm:ml-32 space-y-12">
+          
+          <!-- ITEM 1: Asisten Dosen Statistika SCU -->
+          <div class="relative pl-8 sm:pl-10 group">
+            <!-- Timeline Node: Raindrop with Fox Color -->
+            <div class="absolute -left-[17px] top-1 w-8 h-8 rounded-full bg-rain-950 border-2 border-fox-orange flex items-center justify-center text-fox-orange shadow-glow-orange group-hover:scale-110 transition-transform">
+              <i class="fa-solid fa-square-root-variable text-xs"></i>
+            </div>
+            
+            <!-- Date Tag on the left on Desktop -->
+            <div class="sm:absolute sm:-left-36 sm:top-1 sm:text-right font-mono text-xs text-fox-orange font-semibold mb-1 sm:mb-0">
+              Akademik
+            </div>
+
+            <div class="glass-card rounded-2xl p-6 border-rain-700/60 hover:border-fox-orange transition-all duration-300">
+              <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
+                <h3 class="text-xl font-bold text-white group-hover:text-fox-orange transition-colors">
+                  Asisten Dosen Statistika
+                </h3>
+                <span class="text-xs font-mono text-slate-400 bg-rain-850 px-2 py-0.5 rounded border border-rain-700">SCU Semarang</span>
+              </div>
+              <p class="text-xs sm:text-sm text-slate-300 leading-relaxed mb-4">
+                Membimbing dan mendampingi ratusan mahasiswa Teknik Informatika dalam praktikum komputasi statistika, pemodelan data inferensial, uji hipotesis, dan analisis regresi terapan. Mengoreksi tugas analisis data serta memfasilitasi sesi tutorial intensif.
+              </p>
+              <div class="flex flex-wrap gap-2 text-xs font-mono text-slate-400">
+                <span class="px-2 py-1 rounded bg-rain-950 text-rain-cyan border border-rain-850">Statistika Inferensial</span>
+                <span class="px-2 py-1 rounded bg-rain-950 text-rain-cyan border border-rain-850">Uji ANOVA & Regresi</span>
+                <span class="px-2 py-1 rounded bg-rain-950 text-rain-cyan border border-rain-850">Komputasi Statistik</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- ITEM 2: Koordinator Sekretaris HMTI SCU -->
+          <div class="relative pl-8 sm:pl-10 group">
+            <div class="absolute -left-[17px] top-1 w-8 h-8 rounded-full bg-rain-950 border-2 border-rain-cyan flex items-center justify-center text-rain-cyan shadow-glow-blue group-hover:scale-110 transition-transform">
+              <i class="fa-solid fa-sitemap text-xs"></i>
+            </div>
+            
+            <div class="sm:absolute sm:-left-36 sm:top-1 sm:text-right font-mono text-xs text-rain-cyan font-semibold mb-1 sm:mb-0">
+              Organisasi
+            </div>
+
+            <div class="glass-card rounded-2xl p-6 border-rain-700/60 hover:border-rain-cyan transition-all duration-300">
+              <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
+                <h3 class="text-xl font-bold text-white group-hover:text-rain-cyan transition-colors">
+                  Koordinator Sekretaris HMTI SCU
+                </h3>
+                <span class="text-xs font-mono text-slate-400 bg-rain-850 px-2 py-0.5 rounded border border-rain-700">Himpunan Mahasiswa TI</span>
+              </div>
+              <p class="text-xs sm:text-sm text-slate-300 leading-relaxed mb-4">
+                Memimpin biro kesekretariatan organisasi kemahasiswaan tingkat program studi. Bertanggung jawab atas standardisasi puluhan proposal kegiatan, surat-menyurat resmi, notulensi rapat pleno, serta tata kelola arsip digital seluruh program kerja himpunan.
+              </p>
+              <div class="flex flex-wrap gap-2 text-xs font-mono text-slate-400">
+                <span class="px-2 py-1 rounded bg-rain-950 text-fox-orange border border-rain-850">Manajemen Administrasi</span>
+                <span class="px-2 py-1 rounded bg-rain-950 text-fox-orange border border-rain-850">Tata Kelola Arsip</span>
+                <span class="px-2 py-1 rounded bg-rain-950 text-fox-orange border border-rain-850">Leadership HMTI</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- ITEM 3: Master of Ceremony (MC) & Fasilitator -->
+          <div class="relative pl-8 sm:pl-10 group">
+            <div class="absolute -left-[17px] top-1 w-8 h-8 rounded-full bg-rain-950 border-2 border-fox-amber flex items-center justify-center text-fox-amber shadow-sm group-hover:scale-110 transition-transform">
+              <i class="fa-solid fa-microphone-lines text-xs"></i>
+            </div>
+            
+            <div class="sm:absolute sm:-left-36 sm:top-1 sm:text-right font-mono text-xs text-fox-amber font-semibold mb-1 sm:mb-0">
+              Public Speaking
+            </div>
+
+            <div class="glass-card rounded-2xl p-6 border-rain-700/60 hover:border-fox-amber transition-all duration-300">
+              <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
+                <h3 class="text-xl font-bold text-white group-hover:text-fox-amber transition-colors">
+                  MC & Fasilitator Kegiatan Kampus
+                </h3>
+                <span class="text-xs font-mono text-slate-400 bg-rain-850 px-2 py-0.5 rounded border border-rain-700">Berbagai Event SCU</span>
+              </div>
+              <p class="text-xs sm:text-sm text-slate-300 leading-relaxed mb-4">
+                Memandu kelancaran berbagai rangkaian seminar teknologi informasi, orientasi mahasiswa baru (PTMB), dan forum formal kampus. Mengasah kemampuan komunikasi dua arah, ketenangan publik, dan adaptabilitas waktu nyata.
+              </p>
+              <div class="flex flex-wrap gap-2 text-xs font-mono text-slate-400">
+                <span class="px-2 py-1 rounded bg-rain-950 text-slate-300 border border-rain-850">Event Moderation</span>
+                <span class="px-2 py-1 rounded bg-rain-950 text-slate-300 border border-rain-850">Public Speaking</span>
+                <span class="px-2 py-1 rounded bg-rain-950 text-slate-300 border border-rain-850">Stakeholder Communication</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- ITEM 4: Relawan PPA IO-790 -->
+          <div class="relative pl-8 sm:pl-10 group">
+            <div class="absolute -left-[17px] top-1 w-8 h-8 rounded-full bg-rain-950 border-2 border-fox-crimson flex items-center justify-center text-fox-crimson shadow-glow-red group-hover:scale-110 transition-transform">
+              <i class="fa-solid fa-heart text-xs"></i>
+            </div>
+            
+            <div class="sm:absolute sm:-left-36 sm:top-1 sm:text-right font-mono text-xs text-fox-crimson font-semibold mb-1 sm:mb-0">
+              Sosial
+            </div>
+
+            <div class="glass-card rounded-2xl p-6 border-rain-700/60 hover:border-fox-crimson transition-all duration-300">
+              <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
+                <h3 class="text-xl font-bold text-white group-hover:text-fox-crimson transition-colors">
+                  Relawan PPA IO-790
+                </h3>
+                <span class="text-xs font-mono text-slate-400 bg-rain-850 px-2 py-0.5 rounded border border-rain-700">Pusat Pengembangan Anak</span>
+              </div>
+              <p class="text-xs sm:text-sm text-slate-300 leading-relaxed mb-4">
+                Terlibat aktif dalam pelayanan dan pengajaran anak-anak dari latar belakang prasejahtera, membantu bimbingan belajar dasar serta penguatan karakter dan literasi digital generasi muda.
+              </p>
+              <div class="flex flex-wrap gap-2 text-xs font-mono text-slate-400">
+                <span class="px-2 py-1 rounded bg-rain-950 text-fox-crimson border border-rain-850">Community Development</span>
+                <span class="px-2 py-1 rounded bg-rain-950 text-fox-crimson border border-rain-850">Youth Mentorship</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- ITEM 5: Divisi Multimedia KOMSOS -->
+          <div class="relative pl-8 sm:pl-10 group">
+            <div class="absolute -left-[17px] top-1 w-8 h-8 rounded-full bg-rain-950 border-2 border-slate-400 flex items-center justify-center text-slate-300 shadow-sm group-hover:scale-110 transition-transform">
+              <i class="fa-solid fa-video text-xs"></i>
+            </div>
+            
+            <div class="sm:absolute sm:-left-36 sm:top-1 sm:text-right font-mono text-xs text-slate-400 font-semibold mb-1 sm:mb-0">
+              Multimedia
+            </div>
+
+            <div class="glass-card rounded-2xl p-6 border-rain-700/60 hover:border-slate-300 transition-all duration-300">
+              <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
+                <h3 class="text-xl font-bold text-white group-hover:text-slate-300 transition-colors">
+                  Multimedia KOMSOS
+                </h3>
+                <span class="text-xs font-mono text-slate-400 bg-rain-850 px-2 py-0.5 rounded border border-rain-700">Komunikasi Sosial</span>
+              </div>
+              <p class="text-xs sm:text-sm text-slate-300 leading-relaxed mb-4">
+                Mengoperasikan peralatan broadcasting, live streaming peribadatan dan acara keagamaan, serta pengelolaan routing audio-visual multikamera secara real-time di bawah tensi siaran langsung.
+              </p>
+              <div class="flex flex-wrap gap-2 text-xs font-mono text-slate-400">
+                <span class="px-2 py-1 rounded bg-rain-950 text-slate-300 border border-rain-850">Live Video Switching</span>
+                <span class="px-2 py-1 rounded bg-rain-950 text-slate-300 border border-rain-850">Broadcast Audio Routing</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION: KONTAK & AJAKAN KERJA SAMA (CONTACT SECTION) -->
+    <section id="contact" class="py-20 px-4 sm:px-6 lg:px-8 bg-rain-900/40 relative border-t border-rain-700/50">
+      <div class="max-w-7xl mx-auto">
+        
+        <div class="flex flex-col items-center text-center mb-16">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-rain-800 border border-rain-700 text-xs font-mono text-fox-orange mb-3">
+            <i class="fa-solid fa-paper-plane"></i> Komunikasi & Rekrutmen
+          </div>
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+            Mari Membangun Solusi Bersama
+          </h2>
+          <p class="text-slate-400 text-sm sm:text-base max-w-xl mt-2">
+            Terbuka untuk posisi Backend Engineer Internship, Database Administrator (DBA), maupun kolaborasi riset arsitektur software.
+          </p>
+          <div class="w-24 h-1 bg-gradient-to-r from-rain-cyan via-fox-orange to-fox-crimson rounded-full mt-4"></div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
+          
+          <!-- Contact Channels Info (5 cols) -->
+          <div class="lg:col-span-5 space-y-6">
+            
+            <div class="glass-card rounded-2xl p-6 sm:p-8 border-rain-700/60 space-y-6">
+              <h3 class="text-xl font-bold text-white flex items-center gap-2">
+                <i class="fa-solid fa-address-book text-fox-orange"></i>
+                Saluran Langsung
+              </h3>
+              <p class="text-slate-300 text-sm leading-relaxed">
+                Silakan hubungi saya kapan pun untuk mendiskusikan peluang karir, kueri database yang membandel, atau sekadar bertukar pikiran seputar teknologi.
+              </p>
+
+              <div class="space-y-4">
+                <!-- Email -->
+                <a href="mailto:ernstfinsensius@gmail.com" class="p-4 rounded-xl bg-rain-950/80 hover:bg-rain-850 border border-rain-800 hover:border-fox-orange transition-all flex items-center gap-4 group">
+                  <div class="w-12 h-12 rounded-xl bg-fox-crimson/15 text-fox-crimson flex items-center justify-center text-xl group-hover:scale-110 transition-transform">
+                    <i class="fa-solid fa-envelope"></i>
+                  </div>
+                  <div class="overflow-hidden">
+                    <div class="text-xs text-slate-400 font-mono">Email Pribadi</div>
+                    <div class="text-sm font-semibold text-white group-hover:text-fox-orange transition-colors truncate">
+                      ernstfinsensius@gmail.com
+                    </div>
+                  </div>
+                </a>
+
+                <!-- WhatsApp / Phone -->
+                <a href="https://wa.me/6288802673812" target="_blank" rel="noopener noreferrer" class="p-4 rounded-xl bg-rain-950/80 hover:bg-rain-850 border border-rain-800 hover:border-emerald-400 transition-all flex items-center gap-4 group">
+                  <div class="w-12 h-12 rounded-xl bg-emerald-500/15 text-emerald-400 flex items-center justify-center text-xl group-hover:scale-110 transition-transform">
+                    <i class="fa-brands fa-whatsapp"></i>
+                  </div>
+                  <div>
+                    <div class="text-xs text-slate-400 font-mono">WhatsApp & Telp</div>
+                    <div class="text-sm font-semibold text-white group-hover:text-emerald-400 transition-colors">
+                      +62 888-0267-3812
+                    </div>
+                  </div>
+                </a>
+
+                <!-- LinkedIn -->
+                <a href="https://linkedin.com/in/ernstedgardfinsensius" target="_blank" rel="noopener noreferrer" class="p-4 rounded-xl bg-rain-950/80 hover:bg-rain-850 border border-rain-800 hover:border-rain-cyan transition-all flex items-center gap-4 group">
+                  <div class="w-12 h-12 rounded-xl bg-rain-cyan/15 text-rain-cyan flex items-center justify-center text-xl group-hover:scale-110 transition-transform">
+                    <i class="fa-brands fa-linkedin-in"></i>
+                  </div>
+                  <div>
+                    <div class="text-xs text-slate-400 font-mono">LinkedIn Profile</div>
+                    <div class="text-sm font-semibold text-white group-hover:text-rain-cyan transition-colors">
+                      in/ernstedgardfinsensius
+                    </div>
+                  </div>
+                </a>
+
+                <!-- GitHub -->
+                <a href="https://github.com/ErnstFin" target="_blank" rel="noopener noreferrer" class="p-4 rounded-xl bg-rain-950/80 hover:bg-rain-850 border border-rain-800 hover:border-slate-200 transition-all flex items-center gap-4 group">
+                  <div class="w-12 h-12 rounded-xl bg-slate-700/30 text-slate-200 flex items-center justify-center text-xl group-hover:scale-110 transition-transform">
+                    <i class="fa-brands fa-github"></i>
+                  </div>
+                  <div>
+                    <div class="text-xs text-slate-400 font-mono">GitHub Repositories</div>
+                    <div class="text-sm font-semibold text-white group-hover:text-fox-orange transition-colors">
+                      github.com/ErnstFin
+                    </div>
+                  </div>
+                </a>
+
+                <!-- Location -->
+                <div class="p-4 rounded-xl bg-rain-950/80 border border-rain-800 flex items-center gap-4">
+                  <div class="w-12 h-12 rounded-xl bg-fox-orange/15 text-fox-orange flex items-center justify-center text-xl">
+                    <i class="fa-solid fa-location-dot"></i>
+                  </div>
+                  <div>
+                    <div class="text-xs text-slate-400 font-mono">Domisili</div>
+                    <div class="text-sm font-medium text-white">
+                      Ungaran, Kab. Semarang, Jawa Tengah
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+
+          <!-- Interactive Message Form (7 cols) -->
+          <div class="lg:col-span-7">
+            <div class="glass-card rounded-2xl p-6 sm:p-8 border-rain-700/60 shadow-glass">
+              <h3 class="text-xl font-bold text-white mb-2 flex items-center gap-2">
+                <i class="fa-solid fa-envelope-open-text text-fox-orange"></i>
+                Kirim Pesan Langsung
+              </h3>
+              <p class="text-slate-400 text-xs sm:text-sm mb-6">
+                Formulir ini terintegrasi langsung dengan client email Anda untuk respon cepat.
+              </p>
+
+              <form id="contact-form" class="space-y-4">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label for="name" class="block text-xs font-mono text-slate-300 mb-1.5">Nama Lengkap / Perusahaan</label>
+                    <input type="text" id="name" required placeholder="cth: HR Tech Leader / John Doe" class="w-full px-4 py-3 rounded-xl bg-rain-950 border border-rain-800 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-fox-orange transition-colors">
+                  </div>
+                  <div>
+                    <label for="email" class="block text-xs font-mono text-slate-300 mb-1.5">Alamat Email</label>
+                    <input type="email" id="email" required placeholder="cth: contact@company.id" class="w-full px-4 py-3 rounded-xl bg-rain-950 border border-rain-800 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-fox-orange transition-colors">
+                  </div>
+                </div>
+
+                <div>
+                  <label for="subject" class="block text-xs font-mono text-slate-300 mb-1.5">Topik Diskusi</label>
+                  <select id="subject" class="w-full px-4 py-3 rounded-xl bg-rain-950 border border-rain-800 text-slate-200 text-sm focus:outline-none focus:border-fox-orange transition-colors">
+                    <option value="Tawaran Posisi Backend Engineer / Database Administrator">Peluang Karir / Magang Backend Engineer</option>
+                    <option value="Konsultasi Optimasi Database / Query">Diskusi Teknis Database & Query Tuning</option>
+                    <option value="Kolaborasi Proyek Software">Kolaborasi Proyek Software / API</option>
+                    <option value="Lainnya">Lainnya</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label for="message" class="block text-xs font-mono text-slate-300 mb-1.5">Isi Pesan</label>
+                  <textarea id="message" rows="4" required placeholder="Halo Ernst, kami tertarik dengan keahlian database dan backend Anda untuk..." class="w-full px-4 py-3 rounded-xl bg-rain-950 border border-rain-800 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-fox-orange transition-colors resize-none"></textarea>
+                </div>
+
+                <button type="submit" class="w-full py-3.5 px-6 rounded-xl bg-gradient-to-r from-fox-orange via-fox-light to-fox-crimson text-white font-bold text-sm tracking-wide shadow-glow-orange hover:shadow-glow-red hover:scale-[1.01] active:scale-[0.99] transition-all flex items-center justify-center gap-2">
+                  <i class="fa-solid fa-paper-plane"></i>
+                  <span>Kirim Pesan Sekarang</span>
+                </button>
+              </form>
+
+              <!-- Success Notification Alert -->
+              <div id="form-feedback" class="hidden mt-4 p-4 rounded-xl bg-emerald-950/80 border border-emerald-500/50 text-emerald-300 text-xs font-mono flex items-center gap-2">
+                <i class="fa-solid fa-circle-check text-sm"></i>
+                <span>Membuka aplikasi email default Anda untuk mengirim pesan ke Ernst Edgard Finsensius...</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="relative z-10 bg-rain-950 border-t border-rain-800/80 py-12 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+      
+      <!-- Logo & Tagline -->
+      <div class="flex items-center gap-3">
+        <div class="w-8 h-8 rounded-lg bg-fox-orange/20 border border-fox-orange flex items-center justify-center text-fox-orange">
+          <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+            <path d="M12 2.5L7.5 7.2L3.5 6L5.5 13.5L12 21.5L18.5 13.5L20.5 6L16.5 7.2L12 2.5Z"/>
+          </svg>
+        </div>
+        <div>
+          <div class="text-sm font-bold text-white tracking-wide">Ernst Edgard Finsensius</div>
+          <div class="text-xs text-slate-400 font-mono">The Mind of a Fox, The Depth of the Rain</div>
+        </div>
+      </div>
+
+      <!-- Quick Links -->
+      <div class="flex flex-wrap items-center justify-center gap-6 text-xs text-slate-400 font-mono">
+        <a href="#hero" class="hover:text-fox-orange transition-colors">Kembali ke Atas</a>
+        <a href="#about" class="hover:text-fox-orange transition-colors">Tentang</a>
+        <a href="#skills" class="hover:text-fox-orange transition-colors">Keahlian</a>
+        <a href="#projects" class="hover:text-fox-orange transition-colors">Proyek</a>
+        <a href="#experience" class="hover:text-fox-orange transition-colors">Pengalaman</a>
+        <a href="#contact" class="hover:text-fox-orange transition-colors">Kontak</a>
+      </div>
+
+      <!-- Copyright -->
+      <div class="text-xs text-slate-400 font-mono text-center md:text-right">
+        &copy; <span id="current-year"></span> Ernst Edgard Finsensius. <br class="hidden sm:inline" />
+        Dirancang dengan harmoni Biru Hujan & Oranye Rubah.
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- SCRIPT: CANVAS RAIN SIMULATION, WEB AUDIO API, QUERY LAB, & INTERACTIVITY -->
+  <script>
+    // --- 1. RAIN CANVAS SIMULATION ENGINE ---
+    const canvas = document.getElementById('rain-canvas');
+    const ctx = canvas.getContext('2d');
+    let width = window.innerWidth;
+    let height = window.innerHeight;
+    canvas.width = width;
+    canvas.height = height;
+
+    let rainEnabled = true;
+    let drops = [];
+    let ripples = [];
+    const dropCount = Math.min(Math.floor(width * 0.12), 120); // Responsive drop count
+
+    class Drop {
+      constructor() {
+        this.reset();
+      }
+      reset() {
+        this.x = Math.random() * width;
+        this.y = Math.random() * -height;
+        this.length = Math.random() * 18 + 12;
+        this.speed = Math.random() * 7 + 9;
+        this.opacity = Math.random() * 0.35 + 0.15;
+        this.wind = -0.5; // subtle tilt
+      }
+      update() {
+        this.y += this.speed;
+        this.x += this.wind;
+
+        // Ground splash check
+        if (this.y >= height - 20) {
+          if (Math.random() > 0.6) {
+            ripples.push(new Ripple(this.x, height - 10));
+          }
+          this.reset();
+        }
+      }
+      draw() {
+        ctx.beginPath();
+        ctx.strokeStyle = `rgba(56, 189, 248, ${this.opacity})`;
+        ctx.lineWidth = 1.2;
+        ctx.moveTo(this.x, this.y);
+        ctx.lineTo(this.x + this.wind * 2, this.y + this.length);
+        ctx.stroke();
+      }
+    }
+
+    class Ripple {
+      constructor(x, y) {
+        this.x = x;
+        this.y = y;
+        this.radius = 1;
+        this.maxRadius = Math.random() * 10 + 6;
+        this.opacity = 0.5;
+        this.growthRate = 0.5;
+      }
+      update() {
+        this.radius += this.growthRate;
+        this.opacity -= 0.025;
+      }
+      draw() {
+        if (this.opacity <= 0) return;
+        ctx.beginPath();
+        ctx.strokeStyle = `rgba(56, 189, 248, ${this.opacity})`;
+        ctx.lineWidth = 0.8;
+        ctx.ellipse(this.x, this.y, this.radius, this.radius * 0.4, 0, 0, Math.PI * 2);
+        ctx.stroke();
+      }
+    }
+
+    // Initialize drops
+    for (let i = 0; i < dropCount; i++) {
+      drops.push(new Drop());
+    }
+
+    function animateRain() {
+      if (!rainEnabled) {
+        ctx.clearRect(0, 0, width, height);
+        return;
+      }
+      ctx.clearRect(0, 0, width, height);
+
+      // Draw & update drops
+      for (let i = 0; i < drops.length; i++) {
+        drops[i].update();
+        drops[i].draw();
+      }
+
+      // Draw & update ripples
+      for (let i = ripples.length - 1; i >= 0; i--) {
+        ripples[i].update();
+        ripples[i].draw();
+        if (ripples[i].opacity <= 0) {
+          ripples.splice(i, 1);
+        }
+      }
+
+      requestAnimationFrame(animateRain);
+    }
+    requestAnimationFrame(animateRain);
+
+    window.addEventListener('resize', () => {
+      width = window.innerWidth;
+      height = window.innerHeight;
+      canvas.width = width;
+      canvas.height = height;
+    });
+
+    // Toggle Rain Visual
+    const toggleRainBtn = document.getElementById('toggle-rain-btn');
+    const rainStatus = document.getElementById('rain-status');
+    const rainIcon = document.getElementById('rain-icon');
+
+    toggleRainBtn.addEventListener('click', () => {
+      rainEnabled = !rainEnabled;
+      if (rainEnabled) {
+        rainStatus.textContent = 'Hujan: ON';
+        rainIcon.className = 'fa-solid fa-cloud-showers-heavy text-rain-cyan';
+        animateRain();
+      } else {
+        rainStatus.textContent = 'Hujan: OFF';
+        rainIcon.className = 'fa-solid fa-cloud text-slate-500';
+      }
+    });
+
+    // --- 2. AMBIENT RAIN SOUND (SYNTHESIZED WEB AUDIO API - NO EXTERNAL AUDIO FILE NEEDED) ---
+    let audioCtx = null;
+    let rainNoiseNode = null;
+    let rainGainNode = null;
+    let isAudioPlaying = false;
+
+    const toggleAudioBtn = document.getElementById('toggle-audio-btn');
+    const audioIcon = document.getElementById('audio-icon');
+    const audioStatus = document.getElementById('audio-status');
+
+    function createRainAudio() {
+      const AudioContext = window.AudioContext || window.webkitAudioContext;
+      audioCtx = new AudioContext();
+
+      // Buffer size: 2 seconds of pink/brown noise
+      const bufferSize = audioCtx.sampleRate * 2;
+      const noiseBuffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+      const output = noiseBuffer.getChannelData(0);
+
+      // Pink noise algorithm
+      let b0 = 0, b1 = 0, b2 = 0, b3 = 0, b4 = 0, b5 = 0, b6 = 0;
+      for (let i = 0; i < bufferSize; i++) {
+        const white = Math.random() * 2 - 1;
+        b0 = 0.99886 * b0 + white * 0.0555179;
+        b1 = 0.99332 * b1 + white * 0.0750759;
+        b2 = 0.96900 * b2 + white * 0.1538520;
+        b3 = 0.86650 * b3 + white * 0.3104856;
+        b4 = 0.55000 * b4 + white * 0.5329522;
+        b5 = -0.7616 * b5 - white * 0.0168980;
+        output[i] = b0 + b1 + b2 + b3 + b4 + b5 + b6 + white * 0.5362;
+        output[i] *= 0.04; // Gentle volume
+        b6 = white * 0.115926;
+      }
+
+      const whiteNoise = audioCtx.createBufferSource();
+      whiteNoise.buffer = noiseBuffer;
+      whiteNoise.loop = true;
+
+      // Lowpass filter to simulate rain hitting window/ground
+      const lowpass = audioCtx.createBiquadFilter();
+      lowpass.type = 'lowpass';
+      lowpass.frequency.value = 850;
+
+      rainGainNode = audioCtx.createGain();
+      rainGainNode.gain.setValueAtTime(0.001, audioCtx.currentTime);
+      rainGainNode.gain.exponentialRampToValueAtTime(0.2, audioCtx.currentTime + 1.5);
+
+      whiteNoise.connect(lowpass);
+      lowpass.connect(rainGainNode);
+      rainGainNode.connect(audioCtx.destination);
+
+      whiteNoise.start();
+      rainNoiseNode = whiteNoise;
+    }
+
+    toggleAudioBtn.addEventListener('click', () => {
+      if (!isAudioPlaying) {
+        if (!audioCtx) {
+          createRainAudio();
+        } else if (audioCtx.state === 'suspended') {
+          audioCtx.resume();
+        }
+        if (rainGainNode) {
+          rainGainNode.gain.cancelScheduledValues(audioCtx.currentTime);
+          rainGainNode.gain.setValueAtTime(rainGainNode.gain.value, audioCtx.currentTime);
+          rainGainNode.gain.linearRampToValueAtTime(0.2, audioCtx.currentTime + 1);
+        }
+        isAudioPlaying = true;
+        audioIcon.className = 'fa-solid fa-volume-high text-fox-orange';
+        audioStatus.textContent = 'Suara: ON';
+      } else {
+        if (rainGainNode && audioCtx) {
+          rainGainNode.gain.cancelScheduledValues(audioCtx.currentTime);
+          rainGainNode.gain.setValueAtTime(rainGainNode.gain.value, audioCtx.currentTime);
+          rainGainNode.gain.linearRampToValueAtTime(0.001, audioCtx.currentTime + 0.8);
+        }
+        isAudioPlaying = false;
+        audioIcon.className = 'fa-solid fa-volume-xmark text-slate-400';
+        audioStatus.textContent = 'Suara: OFF';
+      }
+    });
+
+    // --- 3. PROJECT FILTERING LOGIC ---
+    const filterButtons = document.querySelectorAll('.project-filter-btn');
+    const projectCards = document.querySelectorAll('.project-card');
+
+    filterButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        // Reset button states
+        filterButtons.forEach(b => {
+          b.className = 'project-filter-btn px-4 py-2 rounded-xl text-xs font-mono font-medium transition-all bg-rain-850 hover:bg-rain-800 text-slate-300 border border-rain-700';
+        });
+        // Activate clicked button
+        btn.className = 'project-filter-btn px-4 py-2 rounded-xl text-xs font-mono font-medium transition-all bg-gradient-to-r from-fox-orange to-fox-crimson text-white shadow-glow-orange';
+
+        const filterValue = btn.getAttribute('data-filter');
+
+        projectCards.forEach(card => {
+          const categories = card.getAttribute('data-category');
+          if (filterValue === 'all' || categories.includes(filterValue)) {
+            card.classList.remove('hidden');
+            card.classList.add('flex');
+          } else {
+            card.classList.add('hidden');
+            card.classList.remove('flex');
+          }
+        });
+      });
+    });
+
+    // --- 4. EXPLAIN ANALYZE SIMULATOR LAB ---
+    const btnUnoptimized = document.getElementById('btn-unoptimized');
+    const btnOptimized = document.getElementById('btn-optimized');
+    const queryDisplay = document.getElementById('query-sql-display');
+    const statScanMethod = document.getElementById('stat-scan-method');
+    const statExecTime = document.getElementById('stat-exec-time');
+    const statCost = document.getElementById('stat-cost');
+    const statExplanation = document.getElementById('stat-explanation');
+
+    const codeUnoptimized = `-- Kueri Tanpa Indeks (Full Sequential Scan pada 1.25M records)
+EXPLAIN ANALYZE
+SELECT id, user_id, amount, created_at
+FROM transactions
+WHERE status = 'SUCCESS'
+  AND created_at >= NOW() - INTERVAL '30 days'
+ORDER BY created_at DESC;`;
+
+    const codeOptimized = `-- Kueri Teroptimasi (Membuat & Memakai B-Tree Composite Index)
+CREATE INDEX CONCURRENTLY idx_trx_status_created 
+ON transactions (status, created_at DESC);
+
+-- Eksekusi teroptimasi:
+EXPLAIN ANALYZE
+SELECT id, user_id, amount, created_at
+FROM transactions
+WHERE status = 'SUCCESS'
+  AND created_at >= NOW() - INTERVAL '30 days'
+ORDER BY created_at DESC;`;
+
+    function setOptimizedState(isOpt) {
+      if (isOpt) {
+        queryDisplay.textContent = codeOptimized;
+        statScanMethod.textContent = 'Index Scan via idx_trx_status_created';
+        statScanMethod.className = 'text-base sm:text-lg font-bold font-mono text-emerald-400 mt-1';
+        statExecTime.textContent = '1.18 ms (98.9% faster)';
+        statExecTime.className = 'text-base sm:text-lg font-bold font-mono text-fox-orange mt-1';
+        statCost.textContent = '42 blocks / 0 disk spills';
+        statExplanation.innerHTML = 'PostgreSQL memanfaatkan pointer B-Tree composite. Mesin tidak perlu menelusuri 1.250.000 row secara sekuensial, memangkas latensi dari <strong class="text-fox-crimson">184 ms</strong> menjadi <strong class="text-emerald-400">1.18 ms</strong>.';
+
+        btnOptimized.className = 'px-3.5 py-1.5 rounded-lg text-xs font-mono font-medium transition-all bg-gradient-to-r from-fox-orange to-fox-crimson text-white shadow-glow-orange';
+        btnUnoptimized.className = 'px-3.5 py-1.5 rounded-lg text-xs font-mono font-medium transition-all text-slate-400 hover:text-white';
+      } else {
+        queryDisplay.textContent = codeUnoptimized;
+        statScanMethod.textContent = 'Sequential Scan (Full Table Scan)';
+        statScanMethod.className = 'text-base sm:text-lg font-bold font-mono text-fox-crimson mt-1';
+        statExecTime.textContent = '184.62 ms (Bottleneck)';
+        statExecTime.className = 'text-base sm:text-lg font-bold font-mono text-fox-crimson mt-1';
+        statCost.textContent = '1,250,000 rows read from disk';
+        statExplanation.innerHTML = '<span class="text-fox-crimson font-semibold">Tinggi Risiko Bottleneck:</span> Mesin membaca seluruh blok penyimpanan satu per satu dari disk storage ke shared buffer karena tidak ada struktur indeks pendukung.';
+
+        btnUnoptimized.className = 'px-3.5 py-1.5 rounded-lg text-xs font-mono font-medium transition-all bg-fox-crimson text-white shadow-glow-red';
+        btnOptimized.className = 'px-3.5 py-1.5 rounded-lg text-xs font-mono font-medium transition-all text-slate-400 hover:text-white';
+      }
+    }
+
+    // Default to optimized
+    setOptimizedState(true);
+
+    btnUnoptimized.addEventListener('click', () => setOptimizedState(false));
+    btnOptimized.addEventListener('click', () => setOptimizedState(true));
+
+    // --- 5. MOBILE MENU TOGGLE ---
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const menuIcon = document.getElementById('menu-icon');
+
+    mobileMenuBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+      if (mobileMenu.classList.contains('hidden')) {
+        menuIcon.className = 'fa-solid fa-bars text-lg';
+      } else {
+        menuIcon.className = 'fa-solid fa-xmark text-lg text-fox-orange';
+      }
+    });
+
+    // Close mobile menu when links are clicked
+    mobileMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.add('hidden');
+        menuIcon.className = 'fa-solid fa-bars text-lg';
+      });
+    });
+
+    // --- 6. CONTACT FORM INTERACTION (DIRECT MAILTO INTEGRATION) ---
+    const contactForm = document.getElementById('contact-form');
+    const formFeedback = document.getElementById('form-feedback');
+
+    contactForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const subject = document.getElementById('subject').value;
+      const message = document.getElementById('message').value;
+
+      formFeedback.classList.remove('hidden');
+
+      const bodyContent = `Halo Ernst Edgard Finsensius,\n\nNama / Perusahaan: ${name}\nEmail Pengirim: ${email}\nTopik: ${subject}\n\nPesan:\n${message}\n\n---\nDikirim via Form Portofolio`;
+      const mailtoUrl = `mailto:ernstfinsensius@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(bodyContent)}`;
+      
+      setTimeout(() => {
+        window.location.href = mailtoUrl;
+      }, 600);
+    });
+
+    // --- 7. AUTO CURRENT YEAR ---
+    document.getElementById('current-year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
+
