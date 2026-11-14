@@ -5,14 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ernst Edgard Finsensius | Portofolio Mahasiswa Teknik Informatika</title>
   
-  <meta name="description" content="Portofolio Ernst Edgard Finsensius, mahasiswa S1 Teknik Informatika Universitas Katolik Soegijapranata (SCU Semarang). Fokus belajar sistem basis data dan backend engineering.">
+  <meta name="description" content="Portofolio resmi Ernst Edgard Finsensius, mahasiswa S1 Teknik Informatika Universitas Katolik Soegijapranata (SCU Semarang). Fokus sistem basis data dan rekayasa backend.">
   <meta name="author" content="Ernst Edgard Finsensius">
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='48' fill='%23EA580C'/><circle cx='38' cy='45' r='5' fill='%230F172A'/><circle cx='62' cy='45' r='5' fill='%230F172A'/><circle cx='50' cy='55' r='3' fill='%230F172A'/></svg>">
+  
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='48' fill='%23F06B04'/><circle cx='38' cy='45' r='5' fill='%23071322'/><circle cx='62' cy='45' r='5' fill='%23071322'/><circle cx='50' cy='55' r='3' fill='%23071322'/></svg>">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
   <script src="https://cdn.tailwindcss.com"></script>
@@ -25,22 +25,21 @@
             mono: ['"JetBrains Mono"', 'monospace'],
           },
           colors: {
-            surface: {
-              base: '#090D16',
-              raised: '#0F172A',
-              card: '#131D31',
-              border: '#1E293B',
-              borderLight: '#334155',
+            palette: {
+              blaze: '#F06B04',
+              orangeYellow: '#FBB728',
+              wheatfield: '#F5ECD2',
+              curiousBlue: '#2C9FC7',
+              niceBlue: '#1570AC',
+              wine: '#A1081E',
             },
-            fox: {
-              DEFAULT: '#EA580C',
-              hover: '#C2410C',
-              light: '#FB923C',
-              soft: 'rgba(234, 88, 12, 0.12)',
-            },
-            rain: {
-              cyan: '#38BDF8',
-              muted: '#64748B',
+            theme: {
+              base: '#071322',
+              surface: '#0E1E34',
+              card: '#132742',
+              cardHover: '#183153',
+              border: '#1D3A60',
+              borderLight: '#2A4E7F',
             }
           }
         }
@@ -49,16 +48,37 @@
   </script>
 
   <style>
-    /* Base interaction & accessible focus */
-    a, button, summary, select, input, textarea {
+    :root {
+      --color-blaze-orange: #F06B04;
+      --color-orange-yellow: #FBB728;
+      --color-wheatfield: #F5ECD2;
+      --color-curious-blue: #2C9FC7;
+      --color-nice-blue: #1570AC;
+      --color-wine: #A1081E;
+
+      --bg-deep: #071322;
+      --bg-surface: #0E1E34;
+      --bg-card: #132742;
+      --border-subtle: #1D3A60;
+      --text-wheat: #F5ECD2;
+      --text-muted: #9BB3CE;
+    }
+
+    body {
+      background-color: var(--bg-deep);
+      color: var(--text-wheat);
+    }
+
+    /* Accessible interactive targets and focus indicator */
+    a, button, input, select, textarea {
       cursor: pointer;
     }
     :focus-visible {
-      outline: 2px solid #EA580C;
-      outline-offset: 2px;
+      outline: 2px solid var(--color-blaze-orange);
+      outline-offset: 3px;
     }
 
-    /* Ambient rain canvas positioned strictly in background */
+    /* Canvas background layer */
     #rain-canvas {
       position: fixed;
       inset: 0;
@@ -67,26 +87,35 @@
       pointer-events: none;
       z-index: 0;
     }
+
+    /* Mascot subtle float */
+    @keyframes cozyFloat {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-5px); }
+    }
+    .mascot-float {
+      animation: cozyFloat 4s ease-in-out infinite;
+    }
   </style>
 </head>
-<body class="bg-surface-base text-slate-300 font-sans antialiased selection:bg-fox selection:text-white relative min-h-screen">
+<body class="font-sans antialiased selection:bg-palette-blaze selection:text-white relative min-h-screen overflow-x-hidden">
 
   <canvas id="rain-canvas"></canvas>
 
-  <header class="sticky top-0 z-40 bg-surface-base/90 backdrop-blur-md border-b border-surface-border">
+  <header class="sticky top-0 z-40 bg-theme-base/95 backdrop-blur-sm border-b border-theme-border">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
       
       <a href="#hero" class="flex items-center gap-3 group">
-        <div class="w-9 h-9 rounded-lg bg-surface-raised border border-surface-borderLight flex items-center justify-center overflow-hidden">
-          <svg class="w-7 h-7" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Logo Rubah">
-            <path d="M48 78 L38 28 C38 28 72 40 85 54 Z" fill="#EA580C" stroke="#4A150D" stroke-width="5" stroke-linejoin="round"/>
+        <div class="w-10 h-10 rounded-lg bg-theme-surface border border-theme-border flex items-center justify-center overflow-hidden shrink-0">
+          <svg class="w-8 h-8" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Logo Rubah">
+            <path d="M48 78 L38 28 C38 28 72 40 85 54 Z" fill="#F06B04" stroke="#4A150D" stroke-width="5" stroke-linejoin="round"/>
             <path d="M38 28 L34 48 L46 36 Z" fill="#18181B"/>
-            <path d="M52 68 L44 38 L72 52 Z" fill="#FDBF9C" stroke="#4A150D" stroke-width="4" stroke-linejoin="round"/>
-            <path d="M152 78 L162 28 C162 28 128 40 115 54 Z" fill="#EA580C" stroke="#4A150D" stroke-width="5" stroke-linejoin="round"/>
+            <path d="M52 68 L44 38 L72 52 Z" fill="#FBB728" stroke="#4A150D" stroke-width="4" stroke-linejoin="round"/>
+            <path d="M152 78 L162 28 C162 28 128 40 115 54 Z" fill="#F06B04" stroke="#4A150D" stroke-width="5" stroke-linejoin="round"/>
             <path d="M162 28 L166 48 L154 36 Z" fill="#18181B"/>
-            <path d="M148 68 L156 38 L128 52 Z" fill="#FDBF9C" stroke="#4A150D" stroke-width="4" stroke-linejoin="round"/>
-            <path d="M100 48 C50 48 20 85 20 115 C20 152 60 172 100 172 C140 172 180 152 180 115 C180 85 150 48 100 48 Z" fill="#EA580C" stroke="#4A150D" stroke-width="6"/>
-            <path d="M22 118 C22 150 60 172 100 172 C140 172 178 150 178 118 C145 138 122 122 100 134 C78 122 55 138 22 118 Z" fill="#FFFFFF" stroke="#4A150D" stroke-width="5"/>
+            <path d="M148 68 L156 38 L128 52 Z" fill="#FBB728" stroke="#4A150D" stroke-width="4" stroke-linejoin="round"/>
+            <path d="M100 48 C50 48 20 85 20 115 C20 152 60 172 100 172 C140 172 180 152 180 115 C180 85 150 48 100 48 Z" fill="#F06B04" stroke="#4A150D" stroke-width="6"/>
+            <path d="M22 118 C22 150 60 172 100 172 C140 172 178 150 178 118 C145 138 122 122 100 134 C78 122 55 138 22 118 Z" fill="#F5ECD2" stroke="#4A150D" stroke-width="5"/>
             <circle cx="70" cy="114" r="10" fill="#18181B"/>
             <circle cx="130" cy="114" r="10" fill="#18181B"/>
             <ellipse cx="58" cy="128" rx="8" ry="4.5" fill="#FDA4AF"/>
@@ -96,145 +125,196 @@
           </svg>
         </div>
         <div class="flex flex-col">
-          <span class="font-bold text-sm sm:text-base text-slate-100 group-hover:text-fox transition-colors">
+          <span class="font-bold text-sm sm:text-base text-palette-wheatfield group-hover:text-palette-blaze transition-colors">
             Ernst Finsensius
           </span>
-          <span class="text-xs text-slate-400">
+          <span class="text-xs text-palette-curiousBlue">
             Teknik Informatika SCU
           </span>
         </div>
       </a>
 
-      <nav class="hidden md:flex items-center gap-6 text-sm font-medium" aria-label="Navigasi Utama">
-        <a href="#about" class="text-slate-300 hover:text-white transition-colors">Tentang</a>
-        <a href="#skills" class="text-slate-300 hover:text-white transition-colors">Keahlian</a>
-        <a href="#projects" class="text-slate-300 hover:text-white transition-colors">Proyek</a>
-        <a href="#experience" class="text-slate-300 hover:text-white transition-colors">Pengalaman</a>
-        <a href="#contact" class="text-slate-300 hover:text-white transition-colors">Kontak</a>
+      <nav class="hidden md:flex items-center gap-6 text-sm font-medium" aria-label="Navigasi Utama Desktop">
+        <a href="#about" class="text-palette-wheatfield/80 hover:text-palette-wheatfield hover:underline underline-offset-4 transition-colors">Tentang</a>
+        <a href="#skills" class="text-palette-wheatfield/80 hover:text-palette-wheatfield hover:underline underline-offset-4 transition-colors">Keahlian</a>
+        <a href="#projects" class="text-palette-wheatfield/80 hover:text-palette-wheatfield hover:underline underline-offset-4 transition-colors">Proyek</a>
+        <a href="#experience" class="text-palette-wheatfield/80 hover:text-palette-wheatfield hover:underline underline-offset-4 transition-colors">Pengalaman</a>
+        <a href="#contact" class="text-palette-wheatfield/80 hover:text-palette-wheatfield hover:underline underline-offset-4 transition-colors">Kontak</a>
       </nav>
 
       <div class="flex items-center gap-2.5">
-        <button id="toggle-rain-btn" class="px-2.5 py-1.5 rounded-lg border border-surface-border bg-surface-raised hover:bg-surface-card text-xs text-slate-300 transition-colors flex items-center gap-1.5" title="Hidupkan atau matikan animasi hujan">
-          <i class="fa-solid fa-cloud-rain text-rain-cyan" id="rain-icon" aria-hidden="true"></i>
+        <button id="toggle-rain-btn" class="min-h-[44px] px-3 py-2 rounded-lg border border-theme-border bg-theme-surface hover:bg-theme-card text-xs text-palette-wheatfield transition-colors flex items-center gap-2" title="Toggle animasi hujan" aria-label="Nyalakan atau matikan animasi hujan">
+          <i class="fa-solid fa-cloud-showers-heavy text-palette-curiousBlue" id="rain-icon" aria-hidden="true"></i>
           <span id="rain-status" class="hidden sm:inline">Hujan: Aktif</span>
         </button>
 
-        <a href="#contact" class="hidden sm:inline-flex items-center gap-2 px-3.5 py-1.5 rounded-lg bg-fox hover:bg-fox-hover text-white text-xs font-semibold transition-colors">
+        <a href="#contact" class="hidden sm:inline-flex items-center min-h-[44px] px-4 py-2 rounded-lg bg-palette-blaze hover:bg-palette-wine text-white text-xs font-semibold transition-colors">
           Hubungi Saya
         </a>
 
-        <button id="mobile-menu-btn" class="md:hidden p-2 rounded-lg border border-surface-border text-slate-300 hover:text-white" aria-label="Buka menu navigasi" aria-expanded="false">
-          <i class="fa-solid fa-bars text-base" id="menu-icon" aria-hidden="true"></i>
+        <button id="mobile-menu-btn" class="md:hidden min-w-[44px] min-h-[44px] flex items-center justify-center rounded-lg border border-theme-border text-palette-wheatfield hover:bg-theme-surface" aria-label="Buka navigasi menu" aria-expanded="false">
+          <i class="fa-solid fa-bars text-lg" id="menu-icon" aria-hidden="true"></i>
         </button>
       </div>
 
     </div>
 
-    <div id="mobile-menu" class="hidden md:hidden px-4 pt-3 pb-5 bg-surface-raised border-b border-surface-border flex flex-col gap-3 text-sm">
-      <a href="#about" class="py-1.5 text-slate-200 hover:text-fox">Tentang Saya</a>
-      <a href="#skills" class="py-1.5 text-slate-200 hover:text-fox">Keahlian Teknis</a>
-      <a href="#projects" class="py-1.5 text-slate-200 hover:text-fox">Proyek Kuliah</a>
-      <a href="#experience" class="py-1.5 text-slate-200 hover:text-fox">Pengalaman & Organisasi</a>
-      <a href="#contact" class="py-1.5 text-fox font-semibold">Hubungi Saya</a>
+    <div id="mobile-menu" class="hidden md:hidden px-4 py-4 bg-theme-surface border-b border-theme-border flex flex-col gap-1 text-sm font-medium">
+      <a href="#about" class="min-h-[44px] flex items-center px-3 rounded text-palette-wheatfield hover:bg-theme-card hover:text-palette-orangeYellow">Tentang Saya</a>
+      <a href="#skills" class="min-h-[44px] flex items-center px-3 rounded text-palette-wheatfield hover:bg-theme-card hover:text-palette-orangeYellow">Keahlian Teknis</a>
+      <a href="#projects" class="min-h-[44px] flex items-center px-3 rounded text-palette-wheatfield hover:bg-theme-card hover:text-palette-orangeYellow">Proyek Kuliah</a>
+      <a href="#experience" class="min-h-[44px] flex items-center px-3 rounded text-palette-wheatfield hover:bg-theme-card hover:text-palette-orangeYellow">Pengalaman & Organisasi</a>
+      <a href="#contact" class="min-h-[44px] flex items-center px-3 rounded text-palette-blaze font-semibold">Hubungi Saya</a>
     </div>
   </header>
 
-  <main class="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 py-12 space-y-24">
+  <main class="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 py-8 sm:py-14 space-y-20 sm:space-y-28">
 
-    <section id="hero" class="pt-6 sm:pt-12">
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+    <section id="hero" class="pt-2 sm:pt-6">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
         
-        <div class="lg:col-span-7 space-y-6">
-          <div class="space-y-3">
-            <p class="text-xs font-mono uppercase tracking-wider text-rain-cyan">
-              Mahasiswa S1 Teknik Informatika
-            </p>
-            <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white leading-tight">
+        <div class="lg:col-span-7 space-y-5 sm:space-y-6">
+          <div class="space-y-2">
+            <span class="inline-block text-xs font-mono font-medium tracking-wide text-palette-curiousBlue bg-theme-surface px-2.5 py-1 rounded border border-theme-border">
+              Peminatan Basis Data & Backend Engineering
+            </span>
+            <h1 class="text-2xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-palette-wheatfield leading-tight">
               Belajar dan bertumbuh dalam dunia backend dan sistem basis data.
             </h1>
           </div>
 
-          <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
-            Halo, saya <span class="text-white font-medium">Ernst Edgard Finsensius</span> dari Ungaran, Kabupaten Semarang. Saat ini menempuh studi di <span class="text-white font-medium">Universitas Katolik Soegijapranata (SCU Semarang)</span> dengan IPK 3.75. Saya tertarik mempelajari bagaimana basis data relasional dikelola dan bagaimana API backend dibangun secara terstruktur.
+          <p class="text-palette-wheatfield/90 text-sm sm:text-base leading-relaxed">
+            Halo, saya <span class="text-palette-orangeYellow font-semibold">Ernst Edgard Finsensius</span> dari Ungaran, Kabupaten Semarang. Saat ini menempuh studi S1 Teknik Informatika di <span class="text-white font-medium">Universitas Katolik Soegijapranata (SCU Semarang)</span> dengan IPK 3.75. Saya berfokus mendalami bagaimana sistem basis data relasional dirancang secara konsisten serta bagaimana arsitektur API backend dikembangkan secara terstruktur.
           </p>
 
-          <div class="flex flex-wrap gap-2 text-xs text-slate-300">
-            <span class="px-2.5 py-1 rounded bg-surface-card border border-surface-border">
-              PostgreSQL & MySQL
+          <div class="flex flex-wrap gap-2 text-xs text-palette-wheatfield">
+            <span class="px-3 py-1.5 rounded bg-theme-surface border border-theme-border">
+              <i class="fa-solid fa-database text-palette-curiousBlue mr-1.5" aria-hidden="true"></i>PostgreSQL & MySQL
             </span>
-            <span class="px-2.5 py-1 rounded bg-surface-card border border-surface-border">
-              PHP (Laravel) & Python
+            <span class="px-3 py-1.5 rounded bg-theme-surface border border-theme-border">
+              <i class="fa-solid fa-code text-palette-blaze mr-1.5" aria-hidden="true"></i>PHP (Laravel) & Python
             </span>
-            <span class="px-2.5 py-1 rounded bg-surface-card border border-surface-border">
-              Statistika Terapan
+            <span class="px-3 py-1.5 rounded bg-theme-surface border border-theme-border">
+              <i class="fa-solid fa-chart-line text-palette-orangeYellow mr-1.5" aria-hidden="true"></i>Statistika Terapan
             </span>
           </div>
 
-          <div class="flex flex-wrap items-center gap-3 pt-2">
-            <a href="#projects" class="px-4 py-2.5 rounded-lg bg-fox hover:bg-fox-hover text-white font-semibold text-xs sm:text-sm transition-colors">
+          <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-2">
+            <a href="#projects" class="min-h-[44px] px-5 py-3 rounded-lg bg-palette-blaze hover:bg-palette-wine text-white font-semibold text-sm transition-colors text-center flex items-center justify-center gap-2">
+              <i class="fa-solid fa-folder-open text-xs" aria-hidden="true"></i>
               Lihat Proyek Kuliah
             </a>
-            <a href="https://github.com/ErnstFin" target="_blank" rel="noopener noreferrer" class="px-3.5 py-2.5 rounded-lg border border-surface-border hover:border-surface-borderLight bg-surface-raised hover:bg-surface-card text-slate-200 text-xs sm:text-sm transition-colors flex items-center gap-2">
-              <i class="fa-brands fa-github text-sm" aria-hidden="true"></i>
+            <a href="https://github.com/ErnstFin" target="_blank" rel="noopener noreferrer" class="min-h-[44px] px-4 py-3 rounded-lg border border-theme-border bg-theme-surface hover:bg-theme-card text-palette-wheatfield text-sm transition-colors flex items-center justify-center gap-2">
+              <i class="fa-brands fa-github text-base text-palette-curiousBlue" aria-hidden="true"></i>
               <span>GitHub</span>
             </a>
-            <a href="https://linkedin.com/in/ernstedgardfinsensius" target="_blank" rel="noopener noreferrer" class="px-3.5 py-2.5 rounded-lg border border-surface-border hover:border-surface-borderLight bg-surface-raised hover:bg-surface-card text-slate-200 text-xs sm:text-sm transition-colors flex items-center gap-2">
-              <i class="fa-brands fa-linkedin text-sm" aria-hidden="true"></i>
+            <a href="https://linkedin.com/in/ernstedgardfinsensius" target="_blank" rel="noopener noreferrer" class="min-h-[44px] px-4 py-3 rounded-lg border border-theme-border bg-theme-surface hover:bg-theme-card text-palette-wheatfield text-sm transition-colors flex items-center justify-center gap-2">
+              <i class="fa-brands fa-linkedin text-base text-palette-orangeYellow" aria-hidden="true"></i>
               <span>LinkedIn</span>
             </a>
           </div>
 
-          <div class="grid grid-cols-3 gap-4 pt-6 border-t border-surface-border">
-            <div>
-              <div class="text-xl font-bold font-mono text-white">3.75 <span class="text-xs text-slate-400 font-sans">/ 4.00</span></div>
-              <div class="text-xs text-slate-400 mt-0.5">IPK Kumulatif</div>
+          <div class="grid grid-cols-3 gap-3 sm:gap-4 pt-5 border-t border-theme-border">
+            <div class="bg-theme-surface/70 p-3 rounded-lg border border-theme-border/60">
+              <div class="text-lg sm:text-2xl font-bold font-mono text-palette-orangeYellow">3.75 <span class="text-xs text-palette-wheatfield/70 font-sans">/ 4.00</span></div>
+              <div class="text-[11px] sm:text-xs text-palette-wheatfield/80 mt-0.5">IPK Kumulatif</div>
             </div>
-            <div>
-              <div class="text-xl font-bold font-mono text-white">5 Proyek</div>
-              <div class="text-xs text-slate-400 mt-0.5">Tugas & Praktikum</div>
+            <div class="bg-theme-surface/70 p-3 rounded-lg border border-theme-border/60">
+              <div class="text-lg sm:text-2xl font-bold font-mono text-palette-curiousBlue">5 Proyek</div>
+              <div class="text-[11px] sm:text-xs text-palette-wheatfield/80 mt-0.5">Karya & Tugas</div>
             </div>
-            <div>
-              <div class="text-xl font-bold font-mono text-white">SCU</div>
-              <div class="text-xs text-slate-400 mt-0.5">Semarang, Jawa Tengah</div>
+            <div class="bg-theme-surface/70 p-3 rounded-lg border border-theme-border/60">
+              <div class="text-lg sm:text-2xl font-bold font-mono text-palette-blaze">SCU</div>
+              <div class="text-[11px] sm:text-xs text-palette-wheatfield/80 mt-0.5">Semarang, Jateng</div>
             </div>
           </div>
         </div>
 
         <div class="lg:col-span-5 flex justify-center">
-          <div class="w-full max-w-sm rounded-xl border border-surface-border bg-surface-card p-6 flex flex-col items-center text-center space-y-4">
+          <div class="w-full max-w-sm rounded-2xl border-2 border-theme-border bg-theme-card p-5 sm:p-6 flex flex-col items-center text-center space-y-4 shadow-xl">
             
-            <div class="w-48 h-48 sm:w-56 sm:h-56 flex items-center justify-center">
-              <svg class="w-full h-full" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Ilustrasi Maskot Rubah">
-                <path d="M48 78 L38 24 C38 24 72 38 85 54 Z" fill="#EA580C" stroke="#4A150D" stroke-width="5.5" stroke-linejoin="round"/>
-                <path d="M38 24 L33 46 L47 33 Z" fill="#18181B"/>
-                <path d="M52 68 L44 36 L72 52 Z" fill="#FDBF9C" stroke="#4A150D" stroke-width="4.5" stroke-linejoin="round"/>
+            <div class="w-56 h-56 sm:w-64 sm:h-64 flex items-center justify-center mascot-float">
+              <svg class="w-full h-full filter drop-shadow-md" viewBox="0 0 240 240" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Maskot Rubah Duduk Memegang Payung di Tengah Hujan">
+                
+                <!-- Tangkai dan Gagang Payung (Dipegang Rubah) -->
+                <path d="M165 38 L142 165" stroke="#4A150D" stroke-width="4.5" stroke-linecap="round"/>
+                <!-- Gagang Melengkung Payung -->
+                <path d="M142 165 C142 173 133 175 128 170" stroke="#4A150D" stroke-width="4.5" stroke-linecap="round" fill="none"/>
+                
+                <!-- Kubah Payung Warna Wine (#A1081E) dengan Garis Nice Blue (#1570AC) -->
+                <path d="M110 52 C120 18 215 32 215 72 C190 68 170 74 150 68 C135 73 120 68 110 52 Z" fill="#A1081E" stroke="#4A150D" stroke-width="4.5" stroke-linejoin="round"/>
+                <path d="M130 57 C145 32 195 40 215 72" stroke="#1570AC" stroke-width="3" fill="none"/>
+                <!-- Ujung Atas Payung -->
+                <path d="M168 33 L164 42" stroke="#FBB728" stroke-width="4" stroke-linecap="round"/>
 
-                <path d="M152 78 L162 24 C162 24 128 38 115 54 Z" fill="#EA580C" stroke="#4A150D" stroke-width="5.5" stroke-linejoin="round"/>
-                <path d="M162 24 L167 46 L153 33 Z" fill="#18181B"/>
-                <path d="M148 68 L156 36 L128 52 Z" fill="#FDBF9C" stroke="#4A150D" stroke-width="4.5" stroke-linejoin="round"/>
+                <!-- Tetesan Air Memantul Lembut di Payung -->
+                <circle cx="140" cy="42" r="2.5" fill="#2C9FC7"/>
+                <circle cx="185" cy="46" r="3" fill="#2C9FC7"/>
+                <circle cx="210" cy="65" r="2" fill="#2C9FC7"/>
 
-                <path d="M100 48 C48 48 18 84 18 116 C18 152 58 174 100 174 C142 174 182 152 182 116 C182 84 152 48 100 48 Z" fill="#EA580C" stroke="#4A150D" stroke-width="6.5"/>
+                <!-- Ekor Rubah Berbulu Lebat dengan Ujung Wheatfield (#F5ECD2) -->
+                <path d="M125 170 C160 175 180 150 170 130 C162 118 145 130 138 145 Z" fill="#F06B04" stroke="#4A150D" stroke-width="4.5" stroke-linejoin="round"/>
+                <path d="M170 130 C165 120 155 122 150 130 C160 132 168 131 170 130 Z" fill="#F5ECD2"/>
 
-                <path d="M20 118 C20 152 60 174 100 174 C140 174 180 152 180 118 C145 138 122 122 100 134 C78 122 55 138 20 118 Z" fill="#FFFFFF" stroke="#4A150D" stroke-width="5.5"/>
+                <!-- Tubuh Rubah yang Duduk Manis -->
+                <path d="M72 135 C65 145 68 185 88 190 C108 195 130 192 138 185 C146 178 142 145 130 135 Z" fill="#F06B04" stroke="#4A150D" stroke-width="5" stroke-linejoin="round"/>
+                
+                <!-- Dada dan Perut Putih/Wheatfield Rubah -->
+                <path d="M86 142 C82 158 84 185 104 187 C122 187 126 160 120 142 C112 147 98 147 86 142 Z" fill="#F5ECD2"/>
 
-                <circle cx="68" cy="115" r="11" fill="#18181B"/>
-                <circle cx="132" cy="115" r="11" fill="#18181B"/>
+                <!-- Kaki Kiri dan Kanan yang Duduk -->
+                <ellipse cx="76" cy="186" rx="12" ry="7" fill="#F06B04" stroke="#4A150D" stroke-width="4"/>
+                <ellipse cx="130" cy="186" rx="12" ry="7" fill="#F06B04" stroke="#4A150D" stroke-width="4"/>
 
-                <ellipse cx="56" cy="129" rx="9" ry="5" fill="#FDA4AF"/>
-                <ellipse cx="144" cy="129" rx="9" ry="5" fill="#FDA4AF"/>
+                <!-- Telinga Kiri Rubah -->
+                <path d="M52 72 L42 22 C42 22 75 36 88 50 Z" fill="#F06B04" stroke="#4A150D" stroke-width="5" stroke-linejoin="round"/>
+                <path d="M42 22 L37 44 L51 31 Z" fill="#18181B"/>
+                <path d="M56 62 L48 34 L76 48 Z" fill="#FBB728" stroke="#4A150D" stroke-width="4" stroke-linejoin="round"/>
 
-                <circle cx="100" cy="129" r="6" fill="#18181B"/>
+                <!-- Telinga Kanan Rubah -->
+                <path d="M148 72 L158 22 C158 22 125 36 112 50 Z" fill="#F06B04" stroke="#4A150D" stroke-width="5" stroke-linejoin="round"/>
+                <path d="M158 22 L163 44 L149 31 Z" fill="#18181B"/>
+                <path d="M144 62 L152 34 L124 48 Z" fill="#FBB728" stroke="#4A150D" stroke-width="4" stroke-linejoin="round"/>
 
-                <path d="M93 137 Q96.5 141.5 100 137 Q103.5 141.5 107 137" stroke="#4A150D" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+                <!-- Bentuk Kepala Bulat Rubah Sesuai Karakter Kawaii -->
+                <path d="M100 44 C50 44 22 78 22 110 C22 144 60 166 100 166 C140 166 178 144 178 110 C178 78 150 44 100 44 Z" fill="#F06B04" stroke="#4A150D" stroke-width="6"/>
+
+                <!-- Pipi dan Dagu Wheatfield (#F5ECD2) -->
+                <path d="M24 112 C24 144 62 166 100 166 C138 166 176 144 176 112 C143 132 121 116 100 128 C79 116 57 132 24 112 Z" fill="#F5ECD2" stroke="#4A150D" stroke-width="5"/>
+
+                <!-- Mata Bulat Hitam Menggemaskan -->
+                <circle cx="70" cy="110" r="10" fill="#18181B"/>
+                <circle cx="130" cy="110" r="10" fill="#18181B"/>
+                <circle cx="73" cy="107" r="3" fill="#FFFFFF"/>
+                <circle cx="133" cy="107" r="3" fill="#FFFFFF"/>
+
+                <!-- Pipi Merona Pink (#FDA4AF) -->
+                <ellipse cx="58" cy="123" rx="8" ry="4.5" fill="#FDA4AF"/>
+                <ellipse cx="142" cy="123" rx="8" ry="4.5" fill="#FDA4AF"/>
+
+                <!-- Hidung Bulat Hitam -->
+                <circle cx="100" cy="123" r="5.5" fill="#18181B"/>
+
+                <!-- Senyum Mulut Kucing/Rubah 'w' -->
+                <path d="M94 131 Q97 135 100 131 Q103 135 106 131" stroke="#4A150D" stroke-width="3" stroke-linecap="round" fill="none"/>
+
+                <!-- Tangan Kanan Rubah Memegang Gagang Payung dengan Erat -->
+                <ellipse cx="140" cy="154" rx="7" ry="6" fill="#F06B04" stroke="#4A150D" stroke-width="3.5"/>
+                <!-- Tangan Kiri di Atas Lutut -->
+                <ellipse cx="78" cy="154" rx="7" ry="6" fill="#F06B04" stroke="#4A150D" stroke-width="3.5"/>
+
+                <!-- Riak Air Lembut Curious Blue (#2C9FC7) di Bawah Rubah -->
+                <ellipse cx="105" cy="198" rx="60" ry="7" fill="#2C9FC7" opacity="0.3"/>
+                <ellipse cx="105" cy="198" rx="40" ry="4" stroke="#2C9FC7" stroke-width="1.2" opacity="0.6"/>
               </svg>
             </div>
 
             <div class="space-y-1">
-              <p class="text-xs text-slate-300">
-                Tema visual portofolio: Rubah di Bawah Hujan
-              </p>
-              <p class="text-[11px] text-slate-400">
-                Karakter rubah sebagai pengingat untuk terus ingin tahu, di tengah tenangnya suasana rintik hujan saat belajar ngoding.
+              <span class="text-xs font-semibold text-palette-orangeYellow">
+                Rubah di Bawah Hujan
+              </span>
+              <p class="text-xs text-palette-wheatfield/80">
+                Simbol ketenangan dan ketekunan belajar di tengah derasnya arus data dan teknologi.
               </p>
             </div>
 
@@ -244,55 +324,55 @@
       </div>
     </section>
 
-    <section id="about" class="pt-6 border-t border-surface-border">
-      <div class="space-y-8">
+    <section id="about" class="pt-6 border-t border-theme-border">
+      <div class="space-y-6">
         
         <div class="space-y-1">
-          <h2 class="text-2xl font-bold text-white tracking-tight">Tentang Saya</h2>
-          <p class="text-xs text-slate-400 font-mono">Latar belakang pendidikan dan minat studi</p>
+          <span class="text-xs font-mono uppercase tracking-wider text-palette-curiousBlue">Profil & Orientasi</span>
+          <h2 class="text-xl sm:text-2xl font-bold text-palette-wheatfield tracking-tight">Tentang Saya</h2>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-start">
           
-          <div class="md:col-span-7 rounded-xl border border-surface-border bg-surface-card p-6 space-y-4 text-sm leading-relaxed text-slate-300">
+          <div class="md:col-span-7 rounded-xl border border-theme-border bg-theme-surface p-5 sm:p-6 space-y-4 text-sm leading-relaxed text-palette-wheatfield/90">
             <p>
-              Saya adalah mahasiswa program studi Teknik Informatika di Universitas Katolik Soegijapranata (SCU Semarang) yang bertempat tinggal di Ungaran, Kabupaten Semarang.
+              Perkenalkan, saya Ernst. Saat ini saya sedang menempuh perkuliahan S1 pada program studi <strong class="text-palette-orangeYellow">Teknik Informatika di Universitas Katolik Soegijapranata (SCU Semarang)</strong>.
             </p>
             <p>
-              Fokus peminatan yang saya pilih adalah <strong class="text-white">Sistem Basis Data & Backend Engineering</strong>. Saya menyukai proses memodelkan relasi tabel, memahami integritas data, dan melihat bagaimana baris kode di server berinteraksi langsung dengan penyimpanan database.
+              Fokus peminatan yang saya pilih adalah <strong class="text-white">Sistem Basis Data dan Backend Engineering</strong>. Saya menyukai alur bagaimana relasi data dimodelkan secara terstruktur, prinsip integritas data dijalankan, serta bagaimana logika server menyajikan respon data secara aman dan rapi.
             </p>
             <p>
-              Saya sadar masih berada pada tahap awal perjalanan sebagai developer. Oleh sebab itu, saya rutin mengerjakan proyek praktikum kuliah secara sungguh-sungguh, membaca dokumentasi resmi teknologi yang dipakai, serta terbuka terhadap evaluasi kode.
+              Saya memandang diri saya sebagai pembelajar yang berproses. Melalui berbagai penugasan praktikum kuliah dan eksplorasi mandiri, saya membiasakan diri membaca dokumentasi resmi, meneliti galat kueri, dan menerima evaluasi agar kode yang saya buat semakin baik.
             </p>
 
-            <div class="pt-2 flex flex-wrap gap-2 text-xs">
-              <span class="text-slate-400">Domisili:</span>
-              <span class="text-slate-200">Ungaran, Kab. Semarang, Jawa Tengah</span>
+            <div class="pt-3 border-t border-theme-border/60 flex items-center gap-2 text-xs text-palette-wheatfield/80">
+              <i class="fa-solid fa-location-dot text-palette-blaze" aria-hidden="true"></i>
+              <span>Domisili: Ungaran, Kabupaten Semarang, Jawa Tengah</span>
             </div>
           </div>
 
-          <div class="md:col-span-5 rounded-xl border border-surface-border bg-surface-card p-6 space-y-4">
+          <div class="md:col-span-5 rounded-xl border border-theme-border bg-theme-surface p-5 sm:p-6 space-y-4">
             <div class="space-y-1">
-              <span class="text-xs font-mono text-fox">Pendidikan Akademik</span>
-              <h3 class="text-base font-bold text-white">S1 Teknik Informatika</h3>
-              <p class="text-xs text-slate-400">Universitas Katolik Soegijapranata (SCU)</p>
+              <span class="text-xs font-mono text-palette-orangeYellow">Pendidikan Formal</span>
+              <h3 class="text-base font-bold text-palette-wheatfield">S1 Teknik Informatika</h3>
+              <p class="text-xs text-palette-wheatfield/80">Universitas Katolik Soegijapranata (SCU)</p>
             </div>
 
-            <div class="p-3.5 rounded-lg bg-surface-raised border border-surface-border flex items-center justify-between">
+            <div class="p-3.5 rounded-lg bg-theme-card border border-theme-border flex items-center justify-between">
               <div>
-                <span class="text-xs text-slate-400 block">Indeks Prestasi Kumulatif</span>
-                <span class="text-2xl font-bold font-mono text-white">3.75 <span class="text-xs text-slate-400 font-sans">/ 4.00</span></span>
+                <span class="text-xs text-palette-wheatfield/80 block">Indeks Prestasi Kumulatif</span>
+                <span class="text-2xl font-bold font-mono text-palette-orangeYellow">3.75 <span class="text-xs text-palette-wheatfield/70 font-sans">/ 4.00</span></span>
               </div>
-              <i class="fa-solid fa-graduation-cap text-2xl text-slate-400" aria-hidden="true"></i>
+              <i class="fa-solid fa-graduation-cap text-2xl text-palette-niceBlue" aria-hidden="true"></i>
             </div>
 
             <div class="space-y-2 text-xs">
-              <span class="font-medium text-slate-300 block">Mata Kuliah Utama:</span>
-              <ul class="space-y-1 text-slate-400 list-disc list-inside">
+              <span class="font-semibold text-palette-wheatfield block">Mata Kuliah Utama:</span>
+              <ul class="space-y-1.5 text-palette-wheatfield/80 list-disc list-inside">
                 <li>Sistem Basis Data (RDBMS)</li>
-                <li>Statistika & Probabilitas Terapan</li>
-                <li>Struktur Data & Algoritma</li>
-                <li>Pemrograman Web & Backend</li>
+                <li>Statistika dan Probabilitas Terapan</li>
+                <li>Struktur Data dan Algoritma</li>
+                <li>Pemrograman Web dan Backend</li>
               </ul>
             </div>
           </div>
@@ -302,107 +382,117 @@
       </div>
     </section>
 
-    <section id="skills" class="pt-6 border-t border-surface-border">
-      <div class="space-y-8">
+    <section id="skills" class="pt-6 border-t border-theme-border">
+      <div class="space-y-6">
         
         <div class="space-y-1">
-          <h2 class="text-2xl font-bold text-white tracking-tight">Keahlian & Teknologi</h2>
-          <p class="text-xs text-slate-400 font-mono">Tools dan teknologi yang digunakan dalam perkuliahan serta proyek mandiri</p>
+          <span class="text-xs font-mono uppercase tracking-wider text-palette-curiousBlue">Kompetensi & Perangkat</span>
+          <h2 class="text-xl sm:text-2xl font-bold text-palette-wheatfield tracking-tight">Keahlian & Teknologi</h2>
+          <p class="text-xs text-palette-wheatfield/80">Perangkat dan bahasa pemrograman yang digunakan dalam perkuliahan dan proyek mandiri.</p>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
           
-          <div class="rounded-xl border border-surface-border bg-surface-card p-6 space-y-4">
-            <div class="space-y-1">
-              <h3 class="text-base font-bold text-white flex items-center gap-2">
-                <i class="fa-solid fa-database text-rain-cyan text-sm" aria-hidden="true"></i>
-                Basis Data (RDBMS)
-              </h3>
-              <p class="text-xs text-slate-400">Penyimpanan terstruktur dan perancangan skema relasi data.</p>
+          <div class="rounded-xl border border-theme-border bg-theme-surface p-5 space-y-4 flex flex-col justify-between">
+            <div class="space-y-3">
+              <div class="flex items-center gap-2.5">
+                <div class="w-8 h-8 rounded bg-theme-card border border-theme-border flex items-center justify-center text-palette-curiousBlue">
+                  <i class="fa-solid fa-database text-sm" aria-hidden="true"></i>
+                </div>
+                <h3 class="text-base font-bold text-palette-wheatfield">Sistem Basis Data (RDBMS)</h3>
+              </div>
+              <p class="text-xs text-palette-wheatfield/80 leading-relaxed">
+                Penyimpanan data terstruktur, perancangan relasi tabel, dan penyusunan kueri data.
+              </p>
+              <ul class="space-y-2 text-xs">
+                <li class="p-2 rounded bg-theme-card border border-theme-border flex justify-between items-center">
+                  <span class="text-white font-medium">PostgreSQL</span>
+                  <span class="text-palette-curiousBlue text-[11px]">Sering Dipakai</span>
+                </li>
+                <li class="p-2 rounded bg-theme-card border border-theme-border flex justify-between items-center">
+                  <span class="text-white font-medium">MySQL</span>
+                  <span class="text-palette-wheatfield/70 text-[11px]">Proyek Kuliah</span>
+                </li>
+                <li class="p-2 rounded bg-theme-card border border-theme-border flex justify-between items-center">
+                  <span class="text-white font-medium">Perancangan ERD</span>
+                  <span class="text-palette-orangeYellow text-[11px]">Dasar s/d Menengah</span>
+                </li>
+              </ul>
             </div>
 
-            <ul class="space-y-2 text-xs">
-              <li class="p-2.5 rounded bg-surface-raised border border-surface-border flex justify-between items-center">
-                <span class="text-slate-200 font-medium">PostgreSQL</span>
-                <span class="text-slate-400 text-[11px]">Sering Dipakai</span>
-              </li>
-              <li class="p-2.5 rounded bg-surface-raised border border-surface-border flex justify-between items-center">
-                <span class="text-slate-200 font-medium">MySQL</span>
-                <span class="text-slate-400 text-[11px]">Proyek Kuliah</span>
-              </li>
-              <li class="p-2.5 rounded bg-surface-raised border border-surface-border flex justify-between items-center">
-                <span class="text-slate-200 font-medium">Perancangan ERD</span>
-                <span class="text-slate-400 text-[11px]">Dasar s/d Menengah</span>
-              </li>
-            </ul>
-
-            <div class="flex flex-wrap gap-1.5 pt-2 text-[11px] text-slate-400 font-mono">
-              <span class="px-2 py-0.5 rounded bg-surface-raised">SQL Queries</span>
-              <span class="px-2 py-0.5 rounded bg-surface-raised">JOIN</span>
-              <span class="px-2 py-0.5 rounded bg-surface-raised">Aggregation</span>
-              <span class="px-2 py-0.5 rounded bg-surface-raised">DBeaver</span>
-            </div>
-          </div>
-
-          <div class="rounded-xl border border-surface-border bg-surface-card p-6 space-y-4">
-            <div class="space-y-1">
-              <h3 class="text-base font-bold text-white flex items-center gap-2">
-                <i class="fa-solid fa-code text-fox text-sm" aria-hidden="true"></i>
-                Backend & Pemrograman
-              </h3>
-              <p class="text-xs text-slate-400">Pembuatan web application dan integrasi layanan API.</p>
-            </div>
-
-            <ul class="space-y-2 text-xs">
-              <li class="p-2.5 rounded bg-surface-raised border border-surface-border flex justify-between items-center">
-                <span class="text-slate-200 font-medium">PHP (Laravel)</span>
-                <span class="text-slate-400 text-[11px]">Framework Utama</span>
-              </li>
-              <li class="p-2.5 rounded bg-surface-raised border border-surface-border flex justify-between items-center">
-                <span class="text-slate-200 font-medium">Python</span>
-                <span class="text-slate-400 text-[11px]">Scripting & Bot</span>
-              </li>
-              <li class="p-2.5 rounded bg-surface-raised border border-surface-border flex justify-between items-center">
-                <span class="text-slate-200 font-medium">Telegram Bot API</span>
-                <span class="text-slate-400 text-[11px]">Integrasi Webhook</span>
-              </li>
-            </ul>
-
-            <div class="flex flex-wrap gap-1.5 pt-2 text-[11px] text-slate-400 font-mono">
-              <span class="px-2 py-0.5 rounded bg-surface-raised">RESTful API</span>
-              <span class="px-2 py-0.5 rounded bg-surface-raised">MVC Pattern</span>
-              <span class="px-2 py-0.5 rounded bg-surface-raised">Postman</span>
+            <div class="flex flex-wrap gap-1.5 pt-3 border-t border-theme-border/60 text-[11px] font-mono text-palette-wheatfield/80">
+              <span class="px-2 py-0.5 rounded bg-theme-card">SQL Queries</span>
+              <span class="px-2 py-0.5 rounded bg-theme-card">JOIN</span>
+              <span class="px-2 py-0.5 rounded bg-theme-card">Aggregation</span>
+              <span class="px-2 py-0.5 rounded bg-theme-card">DBeaver</span>
             </div>
           </div>
 
-          <div class="rounded-xl border border-surface-border bg-surface-card p-6 space-y-4">
-            <div class="space-y-1">
-              <h3 class="text-base font-bold text-white flex items-center gap-2">
-                <i class="fa-solid fa-chart-simple text-slate-300 text-sm" aria-hidden="true"></i>
-                Data & Tools Pendukung
-              </h3>
-              <p class="text-xs text-slate-400">Eksplorasi data sensor dan alat kolaborasi pengerjaan tugas.</p>
+          <div class="rounded-xl border border-theme-border bg-theme-surface p-5 space-y-4 flex flex-col justify-between">
+            <div class="space-y-3">
+              <div class="flex items-center gap-2.5">
+                <div class="w-8 h-8 rounded bg-theme-card border border-theme-border flex items-center justify-center text-palette-blaze">
+                  <i class="fa-solid fa-code text-sm" aria-hidden="true"></i>
+                </div>
+                <h3 class="text-base font-bold text-palette-wheatfield">Backend & Pemrograman</h3>
+              </div>
+              <p class="text-xs text-palette-wheatfield/80 leading-relaxed">
+                Pembuatan aplikasi web server-side dan integrasi bot pesan otomatis.
+              </p>
+              <ul class="space-y-2 text-xs">
+                <li class="p-2 rounded bg-theme-card border border-theme-border flex justify-between items-center">
+                  <span class="text-white font-medium">PHP (Laravel)</span>
+                  <span class="text-palette-blaze text-[11px]">Framework Utama</span>
+                </li>
+                <li class="p-2 rounded bg-theme-card border border-theme-border flex justify-between items-center">
+                  <span class="text-white font-medium">Python</span>
+                  <span class="text-palette-curiousBlue text-[11px]">Scripting & Bot</span>
+                </li>
+                <li class="p-2 rounded bg-theme-card border border-theme-border flex justify-between items-center">
+                  <span class="text-white font-medium">Telegram Bot API</span>
+                  <span class="text-palette-orangeYellow text-[11px]">Integrasi Webhook</span>
+                </li>
+              </ul>
             </div>
 
-            <ul class="space-y-2 text-xs">
-              <li class="p-2.5 rounded bg-surface-raised border border-surface-border flex justify-between items-center">
-                <span class="text-slate-200 font-medium">Python (Pandas)</span>
-                <span class="text-slate-400 text-[11px]">Pembersihan Data</span>
-              </li>
-              <li class="p-2.5 rounded bg-surface-raised border border-surface-border flex justify-between items-center">
-                <span class="text-slate-200 font-medium">Statistika Terapan</span>
-                <span class="text-slate-400 text-[11px]">Pengujian Hipotesis</span>
-              </li>
-              <li class="p-2.5 rounded bg-surface-raised border border-surface-border flex justify-between items-center">
-                <span class="text-slate-200 font-medium">Git & GitHub</span>
-                <span class="text-slate-400 text-[11px]">Version Control</span>
-              </li>
-            </ul>
+            <div class="flex flex-wrap gap-1.5 pt-3 border-t border-theme-border/60 text-[11px] font-mono text-palette-wheatfield/80">
+              <span class="px-2 py-0.5 rounded bg-theme-card">RESTful API</span>
+              <span class="px-2 py-0.5 rounded bg-theme-card">MVC Architecture</span>
+              <span class="px-2 py-0.5 rounded bg-theme-card">Postman</span>
+            </div>
+          </div>
 
-            <div class="flex flex-wrap gap-1.5 pt-2 text-[11px] text-slate-400 font-mono">
-              <span class="px-2 py-0.5 rounded bg-surface-raised">VS Code</span>
-              <span class="px-2 py-0.5 rounded bg-surface-raised">Laragon</span>
-              <span class="px-2 py-0.5 rounded bg-surface-raised">ThingSpeak</span>
+          <div class="rounded-xl border border-theme-border bg-theme-surface p-5 space-y-4 flex flex-col justify-between">
+            <div class="space-y-3">
+              <div class="flex items-center gap-2.5">
+                <div class="w-8 h-8 rounded bg-theme-card border border-theme-border flex items-center justify-center text-palette-orangeYellow">
+                  <i class="fa-solid fa-wrench text-sm" aria-hidden="true"></i>
+                </div>
+                <h3 class="text-base font-bold text-palette-wheatfield">Data & Tools Pendukung</h3>
+              </div>
+              <p class="text-xs text-palette-wheatfield/80 leading-relaxed">
+                Analisis data dasar, pengujian statistik, serta perkakas kolaborasi pengembang.
+              </p>
+              <ul class="space-y-2 text-xs">
+                <li class="p-2 rounded bg-theme-card border border-theme-border flex justify-between items-center">
+                  <span class="text-white font-medium">Python (Pandas)</span>
+                  <span class="text-palette-curiousBlue text-[11px]">Pembersihan Data</span>
+                </li>
+                <li class="p-2 rounded bg-theme-card border border-theme-border flex justify-between items-center">
+                  <span class="text-white font-medium">Statistika Terapan</span>
+                  <span class="text-palette-orangeYellow text-[11px]">Uji Hipotesis</span>
+                </li>
+                <li class="p-2 rounded bg-theme-card border border-theme-border flex justify-between items-center">
+                  <span class="text-white font-medium">Git & GitHub</span>
+                  <span class="text-palette-wheatfield/70 text-[11px]">Version Control</span>
+                </li>
+              </ul>
+            </div>
+
+            <div class="flex flex-wrap gap-1.5 pt-3 border-t border-theme-border/60 text-[11px] font-mono text-palette-wheatfield/80">
+              <span class="px-2 py-0.5 rounded bg-theme-card">VS Code</span>
+              <span class="px-2 py-0.5 rounded bg-theme-card">Laragon</span>
+              <span class="px-2 py-0.5 rounded bg-theme-card">ThingSpeak</span>
             </div>
           </div>
 
@@ -411,152 +501,152 @@
       </div>
     </section>
 
-    <section id="projects" class="pt-6 border-t border-surface-border">
-      <div class="space-y-8">
+    <section id="projects" class="pt-6 border-t border-theme-border">
+      <div class="space-y-6">
         
         <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
           <div class="space-y-1">
-            <h2 class="text-2xl font-bold text-white tracking-tight">Proyek Pembelajaran</h2>
-            <p class="text-xs text-slate-400 font-mono">5 proyek yang dikerjakan selama kuliah dan eksplorasi mandiri</p>
+            <span class="text-xs font-mono uppercase tracking-wider text-palette-curiousBlue">Karya & Eksplorasi</span>
+            <h2 class="text-xl sm:text-2xl font-bold text-palette-wheatfield tracking-tight">5 Proyek Pembelajaran</h2>
           </div>
 
           <div class="flex flex-wrap gap-1.5 text-xs font-mono" role="tablist" aria-label="Filter Kategori Proyek">
-            <button class="project-filter-btn px-3 py-1 rounded bg-fox text-white font-medium" data-filter="all">Semua (5)</button>
-            <button class="project-filter-btn px-3 py-1 rounded bg-surface-card hover:bg-surface-raised text-slate-300 border border-surface-border" data-filter="backend">Backend</button>
-            <button class="project-filter-btn px-3 py-1 rounded bg-surface-card hover:bg-surface-raised text-slate-300 border border-surface-border" data-filter="database">Basis Data</button>
-            <button class="project-filter-btn px-3 py-1 rounded bg-surface-card hover:bg-surface-raised text-slate-300 border border-surface-border" data-filter="data">Data & IoT</button>
+            <button class="project-filter-btn min-h-[40px] px-3.5 py-2 rounded bg-palette-blaze text-white font-medium transition-colors" data-filter="all">Semua (5)</button>
+            <button class="project-filter-btn min-h-[40px] px-3.5 py-2 rounded bg-theme-surface hover:bg-theme-card text-palette-wheatfield border border-theme-border transition-colors" data-filter="backend">Backend</button>
+            <button class="project-filter-btn min-h-[40px] px-3.5 py-2 rounded bg-theme-surface hover:bg-theme-card text-palette-wheatfield border border-theme-border transition-colors" data-filter="database">Basis Data</button>
+            <button class="project-filter-btn min-h-[40px] px-3.5 py-2 rounded bg-theme-surface hover:bg-theme-card text-palette-wheatfield border border-theme-border transition-colors" data-filter="data">Data & IoT</button>
           </div>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="projects-container">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5" id="projects-container">
           
-          <article class="project-card rounded-xl border border-surface-border bg-surface-card p-6 flex flex-col justify-between" data-category="backend database">
+          <article class="project-card rounded-xl border border-theme-border bg-theme-surface p-5 flex flex-col justify-between hover:border-palette-niceBlue transition-colors" data-category="backend database">
             <div class="space-y-3">
-              <div class="flex items-center justify-between text-xs text-slate-400">
-                <span class="font-mono text-rain-cyan">Web Application</span>
-                <span>Proyek Kuliah</span>
+              <div class="flex items-center justify-between text-xs">
+                <span class="font-mono text-palette-curiousBlue">Web Application</span>
+                <span class="text-palette-wheatfield/70">Proyek Kuliah</span>
               </div>
               <h3 class="text-lg font-bold text-white">FinTrack</h3>
-              <p class="text-xs text-slate-300 leading-relaxed">
+              <p class="text-xs text-palette-wheatfield/90 leading-relaxed">
                 Aplikasi pencatatan keuangan pribadi sederhana berbasis Laravel dan PostgreSQL. Melatih pembuatan relasi antartabel akun, kategori, dan transaksi mutasi pemasukan maupun pengeluaran.
               </p>
-              <div class="flex flex-wrap gap-1.5 pt-1 text-[11px] font-mono text-slate-400">
-                <span class="px-2 py-0.5 rounded bg-surface-raised">Laravel</span>
-                <span class="px-2 py-0.5 rounded bg-surface-raised">PostgreSQL</span>
-                <span class="px-2 py-0.5 rounded bg-surface-raised">Tailwind CSS</span>
+              <div class="flex flex-wrap gap-1.5 pt-1 text-[11px] font-mono text-palette-wheatfield/80">
+                <span class="px-2 py-0.5 rounded bg-theme-card">Laravel</span>
+                <span class="px-2 py-0.5 rounded bg-theme-card">PostgreSQL</span>
+                <span class="px-2 py-0.5 rounded bg-theme-card">Tailwind CSS</span>
               </div>
             </div>
 
-            <div class="pt-5 mt-4 border-t border-surface-border flex items-center justify-between">
-              <a href="https://github.com/ErnstFin/FinTrack" target="_blank" rel="noopener noreferrer" class="text-xs text-fox hover:text-fox-light font-medium flex items-center gap-1.5">
+            <div class="pt-4 mt-4 border-t border-theme-border/60 flex items-center justify-between">
+              <a href="https://github.com/ErnstFin/FinTrack" target="_blank" rel="noopener noreferrer" class="min-h-[44px] inline-flex items-center gap-1.5 text-xs text-palette-orangeYellow hover:text-palette-blaze font-medium">
                 <i class="fa-brands fa-github text-sm" aria-hidden="true"></i>
                 <span>Repositori GitHub</span>
               </a>
-              <span class="text-[11px] text-slate-400">Publik</span>
+              <span class="text-[11px] text-palette-wheatfield/70 font-mono">Publik</span>
             </div>
           </article>
 
-          <article class="project-card rounded-xl border border-surface-border bg-surface-card p-6 flex flex-col justify-between" data-category="backend database">
+          <article class="project-card rounded-xl border border-theme-border bg-theme-surface p-5 flex flex-col justify-between hover:border-palette-niceBlue transition-colors" data-category="backend database">
             <div class="space-y-3">
-              <div class="flex items-center justify-between text-xs text-slate-400">
-                <span class="font-mono text-rain-cyan">Bot Automation</span>
-                <span>Eksplorasi API</span>
+              <div class="flex items-center justify-between text-xs">
+                <span class="font-mono text-palette-curiousBlue">Bot Automation</span>
+                <span class="text-palette-wheatfield/70">Eksplorasi API</span>
               </div>
               <h3 class="text-lg font-bold text-white">TeleHealth Bot</h3>
-              <p class="text-xs text-slate-300 leading-relaxed">
+              <p class="text-xs text-palette-wheatfield/90 leading-relaxed">
                 Bot Telegram berbasis Python untuk simulasi pengingat jadwal minum obat dan pencatatan riwayat kesehatan yang terhubung ke penyimpanan basis data PostgreSQL.
               </p>
-              <div class="flex flex-wrap gap-1.5 pt-1 text-[11px] font-mono text-slate-400">
-                <span class="px-2 py-0.5 rounded bg-surface-raised">Python</span>
-                <span class="px-2 py-0.5 rounded bg-surface-raised">Telegram Bot API</span>
-                <span class="px-2 py-0.5 rounded bg-surface-raised">PostgreSQL</span>
+              <div class="flex flex-wrap gap-1.5 pt-1 text-[11px] font-mono text-palette-wheatfield/80">
+                <span class="px-2 py-0.5 rounded bg-theme-card">Python</span>
+                <span class="px-2 py-0.5 rounded bg-theme-card">Telegram Bot API</span>
+                <span class="px-2 py-0.5 rounded bg-theme-card">PostgreSQL</span>
               </div>
             </div>
 
-            <div class="pt-5 mt-4 border-t border-surface-border flex items-center justify-between">
-              <a href="https://github.com/ErnstFin/TeleHealth" target="_blank" rel="noopener noreferrer" class="text-xs text-fox hover:text-fox-light font-medium flex items-center gap-1.5">
+            <div class="pt-4 mt-4 border-t border-theme-border/60 flex items-center justify-between">
+              <a href="https://github.com/ErnstFin/TeleHealth" target="_blank" rel="noopener noreferrer" class="min-h-[44px] inline-flex items-center gap-1.5 text-xs text-palette-orangeYellow hover:text-palette-blaze font-medium">
                 <i class="fa-brands fa-github text-sm" aria-hidden="true"></i>
                 <span>Repositori GitHub</span>
               </a>
-              <span class="text-[11px] text-slate-400">Publik</span>
+              <span class="text-[11px] text-palette-wheatfield/70 font-mono">Publik</span>
             </div>
           </article>
 
-          <article class="project-card rounded-xl border border-surface-border bg-surface-card p-6 flex flex-col justify-between" data-category="backend database">
+          <article class="project-card rounded-xl border border-theme-border bg-theme-surface p-5 flex flex-col justify-between hover:border-palette-niceBlue transition-colors" data-category="backend database">
             <div class="space-y-3">
-              <div class="flex items-center justify-between text-xs text-slate-400">
-                <span class="font-mono text-rain-cyan">Data Validation</span>
-                <span>Studi Kasus</span>
+              <div class="flex items-center justify-between text-xs">
+                <span class="font-mono text-palette-curiousBlue">Data Validation</span>
+                <span class="text-palette-wheatfield/70">Studi Kasus</span>
               </div>
               <h3 class="text-lg font-bold text-white">SembaPay</h3>
-              <p class="text-xs text-slate-300 leading-relaxed">
+              <p class="text-xs text-palette-wheatfield/90 leading-relaxed">
                 Studi kasus simulasi validasi data transaksi sembako menggunakan Python. Dibuat untuk melatih pemeriksaan keabsahan format input data dan pencegahan duplikasi pencatatan.
               </p>
-              <div class="flex flex-wrap gap-1.5 pt-1 text-[11px] font-mono text-slate-400">
-                <span class="px-2 py-0.5 rounded bg-surface-raised">Python</span>
-                <span class="px-2 py-0.5 rounded bg-surface-raised">Data Validation</span>
-                <span class="px-2 py-0.5 rounded bg-surface-raised">PostgreSQL</span>
+              <div class="flex flex-wrap gap-1.5 pt-1 text-[11px] font-mono text-palette-wheatfield/80">
+                <span class="px-2 py-0.5 rounded bg-theme-card">Python</span>
+                <span class="px-2 py-0.5 rounded bg-theme-card">Data Validation</span>
+                <span class="px-2 py-0.5 rounded bg-theme-card">PostgreSQL</span>
               </div>
             </div>
 
-            <div class="pt-5 mt-4 border-t border-surface-border flex items-center justify-between">
-              <span class="text-xs text-slate-400 flex items-center gap-1.5">
-                <i class="fa-solid fa-lock text-[11px]" aria-hidden="true"></i>
+            <div class="pt-4 mt-4 border-t border-theme-border/60 flex items-center justify-between text-xs text-palette-wheatfield/70">
+              <span class="min-h-[44px] inline-flex items-center gap-1.5">
+                <i class="fa-solid fa-lock text-[11px] text-palette-blaze" aria-hidden="true"></i>
                 <span>Tugas Internal Kuliah</span>
               </span>
-              <span class="text-[11px] text-slate-400">Repo Privat</span>
+              <span class="text-[11px] font-mono">Repo Privat</span>
             </div>
           </article>
 
-          <article class="project-card rounded-xl border border-surface-border bg-surface-card p-6 flex flex-col justify-between" data-category="backend">
+          <article class="project-card rounded-xl border border-theme-border bg-theme-surface p-5 flex flex-col justify-between hover:border-palette-niceBlue transition-colors" data-category="backend">
             <div class="space-y-3">
-              <div class="flex items-center justify-between text-xs text-slate-400">
-                <span class="font-mono text-rain-cyan">Exhibition Portal</span>
-                <span>Proyek Web</span>
+              <div class="flex items-center justify-between text-xs">
+                <span class="font-mono text-palette-curiousBlue">Exhibition Portal</span>
+                <span class="text-palette-wheatfield/70">Proyek Web</span>
               </div>
               <h3 class="text-lg font-bold text-white">Show Case U</h3>
-              <p class="text-xs text-slate-300 leading-relaxed">
+              <p class="text-xs text-palette-wheatfield/90 leading-relaxed">
                 Platform website untuk menampilkan karya dan repositori tugas mahasiswa berbasis Laravel dan MySQL, dilengkapi pembagian peran sederhana (admin, dosen, dan mahasiswa).
               </p>
-              <div class="flex flex-wrap gap-1.5 pt-1 text-[11px] font-mono text-slate-400">
-                <span class="px-2 py-0.5 rounded bg-surface-raised">Laravel</span>
-                <span class="px-2 py-0.5 rounded bg-surface-raised">MySQL</span>
-                <span class="px-2 py-0.5 rounded bg-surface-raised">Bootstrap</span>
+              <div class="flex flex-wrap gap-1.5 pt-1 text-[11px] font-mono text-palette-wheatfield/80">
+                <span class="px-2 py-0.5 rounded bg-theme-card">Laravel</span>
+                <span class="px-2 py-0.5 rounded bg-theme-card">MySQL</span>
+                <span class="px-2 py-0.5 rounded bg-theme-card">Bootstrap</span>
               </div>
             </div>
 
-            <div class="pt-5 mt-4 border-t border-surface-border flex items-center justify-between">
-              <a href="https://github.com/ErnstFin/ShowCaseU" target="_blank" rel="noopener noreferrer" class="text-xs text-fox hover:text-fox-light font-medium flex items-center gap-1.5">
+            <div class="pt-4 mt-4 border-t border-theme-border/60 flex items-center justify-between">
+              <a href="https://github.com/ErnstFin/ShowCaseU" target="_blank" rel="noopener noreferrer" class="min-h-[44px] inline-flex items-center gap-1.5 text-xs text-palette-orangeYellow hover:text-palette-blaze font-medium">
                 <i class="fa-brands fa-github text-sm" aria-hidden="true"></i>
                 <span>Repositori GitHub</span>
               </a>
-              <span class="text-[11px] text-slate-400">Publik</span>
+              <span class="text-[11px] text-palette-wheatfield/70 font-mono">Publik</span>
             </div>
           </article>
 
-          <article class="project-card rounded-xl border border-surface-border bg-surface-card p-6 flex flex-col justify-between" data-category="data">
+          <article class="project-card rounded-xl border border-theme-border bg-theme-surface p-5 flex flex-col justify-between hover:border-palette-niceBlue transition-colors" data-category="data">
             <div class="space-y-3">
-              <div class="flex items-center justify-between text-xs text-slate-400">
-                <span class="font-mono text-rain-cyan">Data Processing</span>
-                <span>Praktikum</span>
+              <div class="flex items-center justify-between text-xs">
+                <span class="font-mono text-palette-curiousBlue">Data Processing</span>
+                <span class="text-palette-wheatfield/70">Praktikum</span>
               </div>
               <h3 class="text-lg font-bold text-white">Pembersihan Data Sensor IoT</h3>
-              <p class="text-xs text-slate-300 leading-relaxed">
+              <p class="text-xs text-palette-wheatfield/90 leading-relaxed">
                 Latihan pemrosesan data sensor telemetri lingkungan dari platform ThingSpeak menggunakan Python (Pandas) untuk mengisi nilai data kosong dan menyaring nilai pencilan.
               </p>
-              <div class="flex flex-wrap gap-1.5 pt-1 text-[11px] font-mono text-slate-400">
-                <span class="px-2 py-0.5 rounded bg-surface-raised">Python</span>
-                <span class="px-2 py-0.5 rounded bg-surface-raised">Pandas</span>
-                <span class="px-2 py-0.5 rounded bg-surface-raised">ThingSpeak</span>
+              <div class="flex flex-wrap gap-1.5 pt-1 text-[11px] font-mono text-palette-wheatfield/80">
+                <span class="px-2 py-0.5 rounded bg-theme-card">Python</span>
+                <span class="px-2 py-0.5 rounded bg-theme-card">Pandas</span>
+                <span class="px-2 py-0.5 rounded bg-theme-card">ThingSpeak</span>
               </div>
             </div>
 
-            <div class="pt-5 mt-4 border-t border-surface-border flex items-center justify-between">
-              <span class="text-xs text-slate-400 flex items-center gap-1.5">
-                <i class="fa-solid fa-file-lines text-[11px]" aria-hidden="true"></i>
+            <div class="pt-4 mt-4 border-t border-theme-border/60 flex items-center justify-between text-xs text-palette-wheatfield/70">
+              <span class="min-h-[44px] inline-flex items-center gap-1.5">
+                <i class="fa-solid fa-file-lines text-[11px] text-palette-curiousBlue" aria-hidden="true"></i>
                 <span>Tugas Praktikum Mandiri</span>
               </span>
-              <span class="text-[11px] text-slate-400">Notebook Lokal</span>
+              <span class="text-[11px] font-mono">Notebook Lokal</span>
             </div>
           </article>
 
@@ -565,67 +655,68 @@
       </div>
     </section>
 
-    <section id="experience" class="pt-6 border-t border-surface-border">
-      <div class="space-y-8">
+    <section id="experience" class="pt-6 border-t border-theme-border">
+      <div class="space-y-6">
         
         <div class="space-y-1">
-          <h2 class="text-2xl font-bold text-white tracking-tight">Pengalaman Kampus & Organisasi</h2>
-          <p class="text-xs text-slate-400 font-mono">Aktivitas asistensi praktikum, kepengurusan mahasiswa, dan keterlibatan sosial</p>
+          <span class="text-xs font-mono uppercase tracking-wider text-palette-curiousBlue">Keterlibatan & Kontribusi</span>
+          <h2 class="text-xl sm:text-2xl font-bold text-palette-wheatfield tracking-tight">Pengalaman Kampus & Organisasi</h2>
+          <p class="text-xs text-palette-wheatfield/80">Aktivitas asistensi praktikum, kepengurusan mahasiswa, dan keterlibatan sosial.</p>
         </div>
 
-        <div class="border-l-2 border-surface-border pl-6 sm:pl-8 space-y-8">
+        <div class="border-l-2 border-theme-border pl-4 sm:pl-7 space-y-6">
           
           <div class="relative space-y-1.5">
-            <div class="absolute -left-[31px] sm:-left-[39px] top-1 w-3.5 h-3.5 rounded-full bg-surface-base border-2 border-fox"></div>
-            <div class="flex flex-wrap items-center justify-between gap-2">
+            <div class="absolute -left-[23px] sm:-left-[35px] top-1.5 w-3 h-3 rounded-full bg-palette-blaze border-2 border-theme-base"></div>
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
               <h3 class="text-base font-bold text-white">Asisten Dosen Statistika</h3>
-              <span class="text-xs font-mono text-slate-400">Universitas Katolik Soegijapranata</span>
+              <span class="text-xs font-mono text-palette-curiousBlue">Universitas Katolik Soegijapranata</span>
             </div>
-            <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+            <p class="text-xs sm:text-sm text-palette-wheatfield/85 leading-relaxed">
               Membantu dosen pengampu dalam mendampingi mahasiswa saat sesi praktikum komputasi statistika, membantu menjelaskan langkah uji hipotesis dasar, serta mengoreksi penugasan data.
             </p>
           </div>
 
           <div class="relative space-y-1.5">
-            <div class="absolute -left-[31px] sm:-left-[39px] top-1 w-3.5 h-3.5 rounded-full bg-surface-base border-2 border-rain-cyan"></div>
-            <div class="flex flex-wrap items-center justify-between gap-2">
+            <div class="absolute -left-[23px] sm:-left-[35px] top-1.5 w-3 h-3 rounded-full bg-palette-orangeYellow border-2 border-theme-base"></div>
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
               <h3 class="text-base font-bold text-white">Koordinator Sekretaris HMTI SCU</h3>
-              <span class="text-xs font-mono text-slate-400">Himpunan Mahasiswa Teknik Informatika</span>
+              <span class="text-xs font-mono text-palette-curiousBlue">Himpunan Mahasiswa Teknik Informatika</span>
             </div>
-            <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+            <p class="text-xs sm:text-sm text-palette-wheatfield/85 leading-relaxed">
               Bertanggung jawab mengoordinasikan kebutuhan surat-menyurat resmi, notulensi rapat berkala, serta pengarsipan berkas proposal dan laporan pertanggungjawaban kegiatan himpunan.
             </p>
           </div>
 
           <div class="relative space-y-1.5">
-            <div class="absolute -left-[31px] sm:-left-[39px] top-1 w-3.5 h-3.5 rounded-full bg-surface-base border-2 border-slate-400"></div>
-            <div class="flex flex-wrap items-center justify-between gap-2">
+            <div class="absolute -left-[23px] sm:-left-[35px] top-1.5 w-3 h-3 rounded-full bg-palette-wheatfield border-2 border-theme-base"></div>
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
               <h3 class="text-base font-bold text-white">Master of Ceremony (MC) & Fasilitator</h3>
-              <span class="text-xs font-mono text-slate-400">Kegiatan Mahasiswa SCU</span>
+              <span class="text-xs font-mono text-palette-curiousBlue">Kegiatan Mahasiswa SCU</span>
             </div>
-            <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+            <p class="text-xs sm:text-sm text-palette-wheatfield/85 leading-relaxed">
               Memandu rangkaian acara seminar teknologi dan orientasi penyambutan mahasiswa baru di lingkungan kampus, melatih ketenangan berbicara di depan publik.
             </p>
           </div>
 
           <div class="relative space-y-1.5">
-            <div class="absolute -left-[31px] sm:-left-[39px] top-1 w-3.5 h-3.5 rounded-full bg-surface-base border-2 border-slate-400"></div>
-            <div class="flex flex-wrap items-center justify-between gap-2">
+            <div class="absolute -left-[23px] sm:-left-[35px] top-1.5 w-3 h-3 rounded-full bg-palette-wine border-2 border-theme-base"></div>
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
               <h3 class="text-base font-bold text-white">Relawan PPA IO-790</h3>
-              <span class="text-xs font-mono text-slate-400">Pusat Pengembangan Anak</span>
+              <span class="text-xs font-mono text-palette-curiousBlue">Pusat Pengembangan Anak</span>
             </div>
-            <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+            <p class="text-xs sm:text-sm text-palette-wheatfield/85 leading-relaxed">
               Ikut serta dalam kegiatan bimbingan belajar dasar serta penguatan karakter dan literasi bagi anak-anak.
             </p>
           </div>
 
           <div class="relative space-y-1.5">
-            <div class="absolute -left-[31px] sm:-left-[39px] top-1 w-3.5 h-3.5 rounded-full bg-surface-base border-2 border-slate-400"></div>
-            <div class="flex flex-wrap items-center justify-between gap-2">
+            <div class="absolute -left-[23px] sm:-left-[35px] top-1.5 w-3 h-3 rounded-full bg-palette-niceBlue border-2 border-theme-base"></div>
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
               <h3 class="text-base font-bold text-white">Multimedia KOMSOS</h3>
-              <span class="text-xs font-mono text-slate-400">Komunikasi Sosial</span>
+              <span class="text-xs font-mono text-palette-curiousBlue">Komunikasi Sosial</span>
             </div>
-            <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+            <p class="text-xs sm:text-sm text-palette-wheatfield/85 leading-relaxed">
               Membantu penataan sudut kamera dan operasional siaran langsung (live streaming) peribadatan keagamaan.
             </p>
           </div>
@@ -635,80 +726,81 @@
       </div>
     </section>
 
-    <section id="contact" class="pt-6 border-t border-surface-border">
-      <div class="space-y-8">
+    <section id="contact" class="pt-6 border-t border-theme-border">
+      <div class="space-y-6">
         
         <div class="space-y-1">
-          <h2 class="text-2xl font-bold text-white tracking-tight">Kontak</h2>
-          <p class="text-xs text-slate-400 font-mono">Kirimkan pesan langsung atau hubungi saluran kontak di bawah ini</p>
+          <span class="text-xs font-mono uppercase tracking-wider text-palette-curiousBlue">Saluran Hubung</span>
+          <h2 class="text-xl sm:text-2xl font-bold text-palette-wheatfield tracking-tight">Kontak</h2>
+          <p class="text-xs text-palette-wheatfield/80">Kirimkan pesan langsung atau hubungi saluran kontak di bawah ini.</p>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-start">
           
-          <div class="md:col-span-5 rounded-xl border border-surface-border bg-surface-card p-6 space-y-4">
-            <h3 class="text-base font-bold text-white">Informasi Kontak</h3>
-            <p class="text-xs text-slate-300 leading-relaxed">
-              Terbuka untuk kesempatan magang (internship), diskusi seputar materi basis data, maupun kolaborasi proyek kuliah.
+          <div class="md:col-span-5 rounded-xl border border-theme-border bg-theme-surface p-5 space-y-4">
+            <h3 class="text-base font-bold text-palette-wheatfield">Informasi Kontak</h3>
+            <p class="text-xs text-palette-wheatfield/85 leading-relaxed">
+              Terbuka untuk kesempatan magang (internship), diskusi seputar basis data relasional, maupun kolaborasi proyek kuliah.
             </p>
 
             <div class="space-y-2.5 pt-1 text-xs">
-              <div class="p-3 rounded-lg bg-surface-raised border border-surface-border flex items-center justify-between gap-2">
+              <div class="p-3 rounded-lg bg-theme-card border border-theme-border flex items-center justify-between gap-2">
                 <div class="overflow-hidden">
-                  <span class="text-slate-400 block text-[11px]">Email Pribadi</span>
-                  <span class="text-slate-100 font-medium truncate block" id="email-text">ernstfinsensius@gmail.com</span>
+                  <span class="text-palette-curiousBlue block text-[11px] font-mono">Email Pribadi</span>
+                  <span class="text-white font-medium truncate block" id="email-text">ernstfinsensius@gmail.com</span>
                 </div>
-                <button id="copy-email-btn" class="px-2.5 py-1 rounded border border-surface-borderLight bg-surface-card hover:bg-surface-base text-slate-200 text-xs shrink-0" title="Salin email ke clipboard">
+                <button id="copy-email-btn" class="min-h-[44px] px-3 py-2 rounded border border-theme-borderLight bg-theme-surface hover:bg-palette-wine text-white text-xs shrink-0 transition-colors" title="Salin email ke clipboard" aria-label="Salin alamat email">
                   <span id="copy-email-label">Salin</span>
                 </button>
               </div>
 
-              <a href="https://wa.me/6288802673812" target="_blank" rel="noopener noreferrer" class="p-3 rounded-lg bg-surface-raised border border-surface-border hover:border-surface-borderLight flex items-center justify-between text-slate-200 hover:text-white transition-colors">
+              <a href="https://wa.me/6288802673812" target="_blank" rel="noopener noreferrer" class="min-h-[44px] p-3 rounded-lg bg-theme-card border border-theme-border hover:border-palette-curiousBlue flex items-center justify-between text-palette-wheatfield hover:text-white transition-colors">
                 <div>
-                  <span class="text-slate-400 block text-[11px]">WhatsApp</span>
+                  <span class="text-palette-curiousBlue block text-[11px] font-mono">WhatsApp</span>
                   <span class="font-medium">+62 888-0267-3812</span>
                 </div>
-                <i class="fa-brands fa-whatsapp text-emerald-400 text-base" aria-hidden="true"></i>
+                <i class="fa-brands fa-whatsapp text-emerald-400 text-lg" aria-hidden="true"></i>
               </a>
 
-              <a href="https://linkedin.com/in/ernstedgardfinsensius" target="_blank" rel="noopener noreferrer" class="p-3 rounded-lg bg-surface-raised border border-surface-border hover:border-surface-borderLight flex items-center justify-between text-slate-200 hover:text-white transition-colors">
+              <a href="https://linkedin.com/in/ernstedgardfinsensius" target="_blank" rel="noopener noreferrer" class="min-h-[44px] p-3 rounded-lg bg-theme-card border border-theme-border hover:border-palette-curiousBlue flex items-center justify-between text-palette-wheatfield hover:text-white transition-colors">
                 <div>
-                  <span class="text-slate-400 block text-[11px]">LinkedIn</span>
+                  <span class="text-palette-curiousBlue block text-[11px] font-mono">LinkedIn</span>
                   <span class="font-medium">in/ernstedgardfinsensius</span>
                 </div>
-                <i class="fa-brands fa-linkedin text-rain-cyan text-base" aria-hidden="true"></i>
+                <i class="fa-brands fa-linkedin text-palette-curiousBlue text-lg" aria-hidden="true"></i>
               </a>
 
-              <a href="https://github.com/ErnstFin" target="_blank" rel="noopener noreferrer" class="p-3 rounded-lg bg-surface-raised border border-surface-border hover:border-surface-borderLight flex items-center justify-between text-slate-200 hover:text-white transition-colors">
+              <a href="https://github.com/ErnstFin" target="_blank" rel="noopener noreferrer" class="min-h-[44px] p-3 rounded-lg bg-theme-card border border-theme-border hover:border-palette-curiousBlue flex items-center justify-between text-palette-wheatfield hover:text-white transition-colors">
                 <div>
-                  <span class="text-slate-400 block text-[11px]">GitHub</span>
+                  <span class="text-palette-curiousBlue block text-[11px] font-mono">GitHub</span>
                   <span class="font-medium">github.com/ErnstFin</span>
                 </div>
-                <i class="fa-brands fa-github text-slate-300 text-base" aria-hidden="true"></i>
+                <i class="fa-brands fa-github text-palette-orangeYellow text-lg" aria-hidden="true"></i>
               </a>
             </div>
           </div>
 
-          <div class="md:col-span-7 rounded-xl border border-surface-border bg-surface-card p-6 space-y-4">
-            <h3 class="text-base font-bold text-white">Kirim Pesan</h3>
-            <p class="text-xs text-slate-400">
+          <div class="md:col-span-7 rounded-xl border border-theme-border bg-theme-surface p-5 space-y-4">
+            <h3 class="text-base font-bold text-palette-wheatfield">Kirim Pesan</h3>
+            <p class="text-xs text-palette-wheatfield/80">
               Formulir ini akan menyiapkan pesan secara terstruktur untuk dikirimkan melalui aplikasi email Anda.
             </p>
 
             <form id="contact-form" class="space-y-4">
               <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label for="contact-name" class="block text-xs font-medium text-slate-300 mb-1">Nama Pengirim</label>
-                  <input type="text" id="contact-name" required placeholder="Nama Anda" class="w-full px-3 py-2 rounded-lg bg-surface-raised border border-surface-border text-slate-100 placeholder-slate-500 text-xs sm:text-sm focus:border-fox">
+                  <label for="contact-name" class="block text-xs font-medium text-palette-wheatfield mb-1.5">Nama Pengirim</label>
+                  <input type="text" id="contact-name" required placeholder="Nama Anda" class="w-full min-h-[44px] px-3.5 py-2.5 rounded-lg bg-theme-card border border-theme-border text-white placeholder-palette-wheatfield/40 text-sm focus:border-palette-blaze">
                 </div>
                 <div>
-                  <label for="contact-email" class="block text-xs font-medium text-slate-300 mb-1">Email Anda</label>
-                  <input type="email" id="contact-email" required placeholder="nama@email.com" class="w-full px-3 py-2 rounded-lg bg-surface-raised border border-surface-border text-slate-100 placeholder-slate-500 text-xs sm:text-sm focus:border-fox">
+                  <label for="contact-email" class="block text-xs font-medium text-palette-wheatfield mb-1.5">Email Anda</label>
+                  <input type="email" id="contact-email" required placeholder="nama@email.com" class="w-full min-h-[44px] px-3.5 py-2.5 rounded-lg bg-theme-card border border-theme-border text-white placeholder-palette-wheatfield/40 text-sm focus:border-palette-blaze">
                 </div>
               </div>
 
               <div>
-                <label for="contact-subject" class="block text-xs font-medium text-slate-300 mb-1">Topik</label>
-                <select id="contact-subject" class="w-full px-3 py-2 rounded-lg bg-surface-raised border border-surface-border text-slate-200 text-xs sm:text-sm focus:border-fox">
+                <label for="contact-subject" class="block text-xs font-medium text-palette-wheatfield mb-1.5">Topik Diskusi</label>
+                <select id="contact-subject" class="w-full min-h-[44px] px-3.5 py-2.5 rounded-lg bg-theme-card border border-theme-border text-white text-sm focus:border-palette-blaze">
                   <option value="Kesempatan Magang / Internship">Kesempatan Magang (Internship)</option>
                   <option value="Diskusi Materi Basis Data / Proyek">Diskusi Materi Basis Data / Proyek</option>
                   <option value="Pertanyaan Umum">Pertanyaan Umum</option>
@@ -716,12 +808,13 @@
               </div>
 
               <div>
-                <label for="contact-message" class="block text-xs font-medium text-slate-300 mb-1">Isi Pesan</label>
-                <textarea id="contact-message" rows="4" required placeholder="Tuliskan pesan Anda..." class="w-full px-3 py-2 rounded-lg bg-surface-raised border border-surface-border text-slate-100 placeholder-slate-500 text-xs sm:text-sm focus:border-fox resize-none"></textarea>
+                <label for="contact-message" class="block text-xs font-medium text-palette-wheatfield mb-1.5">Isi Pesan</label>
+                <textarea id="contact-message" rows="4" required placeholder="Tuliskan pesan Anda..." class="w-full px-3.5 py-2.5 rounded-lg bg-theme-card border border-theme-border text-white placeholder-palette-wheatfield/40 text-sm focus:border-palette-blaze resize-none"></textarea>
               </div>
 
-              <button type="submit" class="w-full py-2.5 rounded-lg bg-fox hover:bg-fox-hover text-white font-semibold text-xs sm:text-sm transition-colors">
-                Buka di Aplikasi Email
+              <button type="submit" class="w-full min-h-[44px] py-3 px-5 rounded-lg bg-palette-blaze hover:bg-palette-wine text-white font-semibold text-sm transition-colors flex items-center justify-center gap-2">
+                <i class="fa-solid fa-paper-plane text-xs" aria-hidden="true"></i>
+                <span>Buka di Aplikasi Email</span>
               </button>
             </form>
           </div>
@@ -733,19 +826,19 @@
 
   </main>
 
-  <footer class="border-t border-surface-border bg-surface-base py-8 mt-20">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400">
+  <footer class="border-t border-theme-border bg-theme-base py-8 mt-16">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-palette-wheatfield/70 text-center sm:text-left">
       <div>
-        <p class="text-slate-200 font-medium">Ernst Edgard Finsensius</p>
-        <p>Mahasiswa S1 Teknik Informatika SCU Semarang</p>
+        <p class="text-palette-wheatfield font-medium">Ernst Edgard Finsensius</p>
+        <p class="text-palette-curiousBlue">Mahasiswa S1 Teknik Informatika SCU Semarang</p>
       </div>
 
-      <div class="flex items-center gap-5">
-        <a href="#hero" class="hover:text-slate-200 transition-colors">Atas</a>
-        <a href="#about" class="hover:text-slate-200 transition-colors">Tentang</a>
-        <a href="#skills" class="hover:text-slate-200 transition-colors">Keahlian</a>
-        <a href="#projects" class="hover:text-slate-200 transition-colors">Proyek</a>
-        <a href="#contact" class="hover:text-slate-200 transition-colors">Kontak</a>
+      <div class="flex items-center gap-5 font-medium">
+        <a href="#hero" class="hover:text-palette-orangeYellow transition-colors">Atas</a>
+        <a href="#about" class="hover:text-palette-orangeYellow transition-colors">Tentang</a>
+        <a href="#skills" class="hover:text-palette-orangeYellow transition-colors">Keahlian</a>
+        <a href="#projects" class="hover:text-palette-orangeYellow transition-colors">Proyek</a>
+        <a href="#contact" class="hover:text-palette-orangeYellow transition-colors">Kontak</a>
       </div>
 
       <p>&copy; <span id="current-year"></span> Ernst Edgard Finsensius.</p>
@@ -762,7 +855,7 @@
 
     let rainEnabled = true;
     let drops = [];
-    const dropCount = Math.min(Math.floor(width * 0.08), 70);
+    const dropCount = Math.min(Math.floor(width * 0.08), 65);
 
     class Drop {
       constructor() { this.reset(); }
@@ -771,7 +864,7 @@
         this.y = Math.random() * -height;
         this.length = Math.random() * 14 + 8;
         this.speed = Math.random() * 5 + 6;
-        this.opacity = Math.random() * 0.18 + 0.08;
+        this.opacity = Math.random() * 0.22 + 0.08;
       }
       update() {
         this.y += this.speed;
@@ -781,10 +874,10 @@
       }
       draw() {
         ctx.beginPath();
-        ctx.strokeStyle = `rgba(56, 189, 248, ${this.opacity})`;
+        ctx.strokeStyle = `rgba(44, 159, 199, ${this.opacity})`;
         ctx.lineWidth = 1;
         ctx.moveTo(this.x, this.y);
-        ctx.lineTo(this.x - 0.5, this.y + this.length);
+        ctx.lineTo(this.x - 0.4, this.y + this.length);
         ctx.stroke();
       }
     }
@@ -822,7 +915,7 @@
       rainEnabled = !rainEnabled;
       if (rainEnabled) {
         rainStatus.textContent = 'Hujan: Aktif';
-        rainIcon.className = 'fa-solid fa-cloud-rain text-rain-cyan';
+        rainIcon.className = 'fa-solid fa-cloud-showers-heavy text-palette-curiousBlue';
         animateRain();
       } else {
         rainStatus.textContent = 'Hujan: Mati';
@@ -836,9 +929,9 @@
     filterButtons.forEach(btn => {
       btn.addEventListener('click', () => {
         filterButtons.forEach(b => {
-          b.className = 'project-filter-btn px-3 py-1 rounded bg-surface-card hover:bg-surface-raised text-slate-300 border border-surface-border';
+          b.className = 'project-filter-btn min-h-[40px] px-3.5 py-2 rounded bg-theme-surface hover:bg-theme-card text-palette-wheatfield border border-theme-border transition-colors';
         });
-        btn.className = 'project-filter-btn px-3 py-1 rounded bg-fox text-white font-medium';
+        btn.className = 'project-filter-btn min-h-[40px] px-3.5 py-2 rounded bg-palette-blaze text-white font-medium transition-colors';
 
         const filter = btn.getAttribute('data-filter');
         projectCards.forEach(card => {
@@ -859,14 +952,14 @@
     mobileMenuBtn.addEventListener('click', () => {
       const isHidden = mobileMenu.classList.toggle('hidden');
       mobileMenuBtn.setAttribute('aria-expanded', String(!isHidden));
-      menuIcon.className = isHidden ? 'fa-solid fa-bars text-base' : 'fa-solid fa-xmark text-base';
+      menuIcon.className = isHidden ? 'fa-solid fa-bars text-lg' : 'fa-solid fa-xmark text-lg';
     });
 
     mobileMenu.querySelectorAll('a').forEach(link => {
       link.addEventListener('click', () => {
         mobileMenu.classList.add('hidden');
         mobileMenuBtn.setAttribute('aria-expanded', 'false');
-        menuIcon.className = 'fa-solid fa-bars text-base';
+        menuIcon.className = 'fa-solid fa-bars text-lg';
       });
     });
 
